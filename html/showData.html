@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">	
+	<title>信息查看</title>
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<link rel="stylesheet" type="text/css" href="../css/page.css">
+	<style type="text/css">
+		.body {
+			width: 100%;
+		}
+		.top {
+			margin: 50px auto;
+			width: 820px;
+			overflow: hidden;
+		}
+		.head-button {
+			width: 100px;
+			height: 34px;
+			line-height: 34px;
+			text-align: center;
+			color: #FEFEFE;
+			background-color: #0D59AE;
+		}
+		.search-box {
+			margin-top: 20px;
+			float: left;
+			width: 100%;
+		}
+		.search-box>img {
+			float: right;
+			width: 135px;
+			height: 54px;
+			position: relative;
+		    top: -3px;
+		    left: -4px;
+		}
+		.search-box>input {
+			padding-left: 20px;
+			width: 661px;
+			height: 46px;
+			color: #ffffff;
+			background-color: rgba(255,255,255,0.3);
+			outline: none;
+			border: 1px solid #50FEFE;
+		}
+		.line {
+			margin: 0 auto;
+			overflow: hidden;
+			padding-bottom: 5px;
+			width: 1200px;
+			border-bottom: 1px solid #00CFFF;
+
+		}
+		.bottom {
+			margin: 15px auto;
+			overflow: hidden;
+			padding-bottom: 5px;
+			width: 1200px;
+		}
+		.line:after {
+			position: relative;
+			top: 5px;
+			left: 755px;
+			content: '';
+			background: url(../img/title-third.png) no-repeat 100% 100% /130px 23px;
+			display: inline-block;
+			width: 130px;
+			height: 23px;
+		}
+		.line>div {
+			float: left;
+			display: inline-block;
+			padding: 5px 20px;
+			background-color: #0078FF;
+			color: #ffffff;
+		}
+		.left {
+			float: left;
+			width: 325px;
+		}
+		.center {
+			margin-left: 7px;
+			float: left;
+			width: 325px;
+		}
+		.right {
+			margin-left: 7px;
+			float: left;
+			width: 530px;
+		}
+		.bottom table {
+			text-align: center;
+			margin-top: 10px;
+			width: 100%;
+			color: #ffffff;
+		}
+		table thead {
+			background-color: #0D3F78;
+		}
+		.where tr:nth-of-type(odd) {
+			background-color: #06254A;
+		}
+		.where tr:nth-of-type(even) {
+			background-color: #0D3F78;
+		}
+		.how tr:nth-of-type(even),.contact tr:nth-of-type(even) {
+			background-color: #06254A;
+		}
+		.how tr:nth-of-type(odd),.contact tr:nth-of-type(odd) {
+			background-color: #0D3F78;
+		}
+		.contact thead tr:nth-of-type(1),.infomation thead tr:nth-of-type(1) {
+			background-color: #06254A;
+		}
+		/*.even {
+			background-color: #0D3F78;
+		}*/
+		td {
+			padding: 5px;
+		}
+		.button {
+			background-color: #0075FC;
+			border-radius: 4px;
+			display: inline-block;
+			padding: 2px 10px;
+		}
+		.button-block {
+			background-color: #0075FC;
+			padding: 3px;
+			width: 100px;
+		}
+	</style>
+</head>
+<body>
+<div class="header-nav">
+		<div class="header-content">
+			<div class="float-l web-name">智慧消防大数据云平台</div>
+			<div class="float-l contain">
+				<ul class="nav-list">
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-1.png">消防大数据</a>
+						<ul>
+							<li><a href="dataShow.html">基础数据显示</a></li>
+							<li><a href="yearsFire.html">历年火灾情况</a></li>
+							<li><a href="dataAnalysis.html">消防数据分析</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-2.png">火灾预警系统</a>
+						<ul>
+							<li><a href="fireAlarmAystem.html">火情预警系统</a></li>
+							<li><a href="fireRiskThermalDiagram.html">火灾风险热力图</a></li>
+							<li><a href="earlyWarningEquipmentStatus.html">预警设备状态</a></li>
+							<li><a href="historicalInformationQuery.html">历史信息查询</a></li>
+							<li><a href="showData.html">信息查看</a></li>
+							<li><a href="buildingPortrait.html">建筑画像</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-3.png">指挥调度系统</a>
+						<ul>
+							<li><a href="platformCommand.html">平台指挥</a></li>
+							<li><a href="monitoring.html">视频监控</a></li>
+							<li><a href="disposalReport.html">处置报告</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="float-l day-info">
+				<div>
+					<p>
+						<span class="m-r-5">2018.4.11</span>
+						<span class="m-r-5">星期三</span>
+						<span> 9:14:56</span>
+					</p>
+					<p class="m-t-5">
+						<span class="p-r-5 border-right"><img class="icon-img" src="../img/icon-weather.png">15℃</span>
+						<span class="p-r-5 p-l-5 border-right"><img class="icon-img" src="../img/icon-humidity.png">37%</span>
+						<span class="p-l-5">东北风三级</span>
+					</p>
+				</div>
+			</div>
+			<div class="float-l">
+				<div class="float-l">
+					<img class="login-button" src="../img/login-button.png">
+				</div>
+				<div class="float-l">
+					<img class="set-button" src="../img/seting.png">
+				</div>
+			</div>
+		</div>
+		<div class="second-bg"></div>
+	</div>
+	<div class="body">
+		<div class="top">
+			<div class="head-button float-l">地址</div>
+			<div class="head-button float-l m-l-5">联系方式</div>
+			<div class="head-button float-l m-l-5">设备类型</div>
+			<div class="search-box">
+				<input type="text" value="请输入你想搜索的关键词"></input>
+				<img src="../img/search.png">
+			</div>
+		</div>
+		<div class="line">
+			<div>地址</div>
+			<div>联系信息</div>
+			<div>联系信息设备信息</div>
+		</div>
+		<div class="bottom">
+			<div class="block-box left">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<div class="block-box-content">
+					<p class="title">西美花街</p>
+					<table class="where">
+						<tr class="odd">
+							<td>大楼信息</td>
+							<td>
+								<div class="button">建筑画像</div>
+							</td>
+						</tr>
+						<tr>
+							<td>位置信息</td>
+							<td>中华大街257号</td>
+						</tr>
+						<tr>
+							<td>正楼层数量</td>
+							<td>31层</td>
+						</tr>
+						<tr>
+							<td>负楼层数量</td>
+							<td>2层</td>
+						</tr>
+					</table>
+					<p class="title">报警策略</p>
+					<table class="how">
+						<tbody>
+							<tr>
+								<td>报警等级</td>
+								<td>
+									<div class="button-block">1级</div>
+								</td>
+								<td>
+									<div>2级</div>
+								</td>
+								<td>
+									<div>3级</div>
+								</td>
+							</tr>
+							<tr>
+								<td>报警次数</td>
+								<td colspan="3">
+									<div class="button-block">5次</div>
+								</td>
+							</tr>
+							<tr>
+								<td>报警设备个数</td>
+								<td colspan="3">
+									<div class="button-block">2次</div>
+								</td>
+							</tr>
+							<tr>
+								<td>报警累计时长</td>
+								<td colspan="3">
+									<div class="button-block">120s</div>
+								</td>
+							</tr>
+							<tr>
+								<td>呼叫联系人</td>
+								<td colspan="3">
+									<div class="button-block">1/2/3级联系人</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="block-box center">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<div class="block-box-content">
+					<p class="title">联系人信息</p>
+					<table class="contact">
+						<thead>
+							<tr>
+								<td>管理员</td>
+								<td>手机号</td>
+								<td>受警级别</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>许可有</td>
+								<td>186324678931</td>
+								<td>1级</td>
+							</tr>
+							<tr>
+								<td>许可有</td>
+								<td>186324678931</td>
+								<td>1级</td>
+							</tr><tr>
+								<td>许可有</td>
+								<td>186324678931</td>
+								<td>1级</td>
+							</tr><tr>
+								<td>许可有</td>
+								<td>186324678931</td>
+								<td>1级</td>
+							</tr><tr>
+								<td>许可有</td>
+								<td>186324678931</td>
+								<td>1级</td>
+							</tr>
+							<tr>
+								<td>许可有</td>
+								<td>186324678931</td>
+								<td>1级</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="pagnation" id="pagnation">
+						<a href="#" target="_blank" class="page-prev">上一页</a>
+						<a href="#" target="_blank" class="current">1</a>
+						<a href="#" target="_blank">2</a>
+						<a href="#" target="_blank">3</a>
+						<a href="#" target="_blank">4</a>
+						<a href="#" target="_blank">5</a>
+						<a href="#" target="_blank">...</a>
+						<a href="#" target="_blank">13</a>
+						<a href="#" target="_blank" class="page-next">下一页</a>
+					</div>
+				</div>
+			</div>
+			<div class="block-box right">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<div class="block-box-content">
+					<p class="title">设备信息</p>
+					<table class="infomation">
+						<thead>
+							<tr class="odd">
+								<td>楼层</td>
+								<td>设备类型</td>
+								<td>设备数量</td>
+								<td>详情</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<div class="button-block">一楼</div>
+								</td>
+								<td>
+									<div class="button-block">烟雾感知探测</div>
+								</td>
+								<td>
+									<div class="button-block">2</div>
+								</td>
+								<td>
+									<div class="button-block">详情</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="button-block">一楼</div>
+								</td>
+								<td>
+									<div class="button-block">烟雾感知探测</div>
+								</td>
+								<td>
+									<div class="button-block">2</div>
+								</td>
+								<td>
+									<div class="button-block">详情</div>
+								</td>
+							</tr><tr>
+								<td>
+									<div class="button-block">一楼</div>
+								</td>
+								<td>
+									<div class="button-block">烟雾感知探测</div>
+								</td>
+								<td>
+									<div class="button-block">2</div>
+								</td>
+								<td>
+									<div class="button-block">详情</div>
+								</td>
+							</tr><tr>
+								<td>
+									<div class="button-block">一楼</div>
+								</td>
+								<td>
+									<div class="button-block">烟雾感知探测</div>
+								</td>
+								<td>
+									<div class="button-block">2</div>
+								</td>
+								<td>
+									<div class="button-block">详情</div>
+								</td>
+							</tr><tr>
+								<td>
+									<div class="button-block">一楼</div>
+								</td>
+								<td>
+									<div class="button-block">烟雾感知探测</div>
+								</td>
+								<td>
+									<div class="button-block">2</div>
+								</td>
+								<td>
+									<div class="button-block">详情</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="pagnation" id="">
+					<a href="#" target="_blank" class="page-prev">上一页</a>
+					<a href="#" target="_blank" class="current">1</a>
+					<a href="#" target="_blank">2</a>
+					<a href="#" target="_blank">3</a>
+					<a href="#" target="_blank">4</a>
+					<a href="#" target="_blank">5</a>
+					<a href="#" target="_blank">...</a>
+					<a href="#" target="_blank">13</a>
+					<a href="#" target="_blank" class="page-next">下一页</a>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/nav.js"></script>
+</body>
+</html>

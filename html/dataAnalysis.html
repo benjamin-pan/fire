@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">	
+	<title>消防数据分析</title>
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<style type="text/css">
+		.body {
+			margin-left: calc(50% - 485px);
+		}
+		.controlled {
+			width: 477px;
+			height: 220px;
+		}
+		#areaPie,#peoplebar,#areaRadar,#buildingBar {
+			height: 100%;
+		}
+		.body>div {
+			width: 968px;
+			margin: 0 auto;
+			overflow: hidden;
+		}
+		.training {
+			margin: 10px auto!important;
+			height: 200px;
+		}
+		#training {
+			height: 200px;
+		}
+	</style>
+</head>
+<body>
+	<div class="header-nav">
+		<div class="header-content">
+			<div class="float-l web-name">智慧消防大数据云平台</div>
+			<div class="float-l contain">
+				<ul class="nav-list">
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-1.png">消防大数据</a>
+						<ul>
+							<li><a href="dataShow.html">基础数据显示</a></li>
+							<li><a href="yearsFire.html">历年火灾情况</a></li>
+							<li><a href="dataAnalysis.html">消防数据分析</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-2.png">火灾预警系统</a>
+						<ul>
+							<li><a href="fireAlarmAystem.html">火情预警系统</a></li>
+							<li><a href="fireRiskThermalDiagram.html">火灾风险热力图</a></li>
+							<li><a href="earlyWarningEquipmentStatus.html">预警设备状态</a></li>
+							<li><a href="historicalInformationQuery.html">历史信息查询</a></li>
+							<li><a href="showData.html">信息查看</a></li>
+							<li><a href="buildingPortrait.html">建筑画像</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-3.png">指挥调度系统</a>
+						<ul>
+							<li><a href="platformCommand.html">平台指挥</a></li>
+							<li><a href="monitoring.html">视频监控</a></li>
+							<li><a href="disposalReport.html">处置报告</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="float-l day-info">
+				<div>
+					<p>
+						<span class="m-r-5">2018.4.11</span>
+						<span class="m-r-5">星期三</span>
+						<span> 9:14:56</span>
+					</p>
+					<p class="m-t-5">
+						<span class="p-r-5 border-right"><img class="icon-img" src="../img/icon-weather.png">15℃</span>
+						<span class="p-r-5 p-l-5 border-right"><img class="icon-img" src="../img/icon-humidity.png">37%</span>
+						<span class="p-l-5">东北风三级</span>
+					</p>
+				</div>
+			</div>
+			<div class="float-l">
+				<div class="float-l">
+					<img class="login-button" src="../img/login-button.png">
+				</div>
+				<div class="float-l">
+					<img class="set-button" src="../img/seting.png">
+				</div>
+			</div>
+		</div>
+		<div class="second-bg"></div>
+	</div>
+	<div class="body">
+		<div>
+			<div class="controlled m-t-10 block-box float-l">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<p class="title">受控区域分析</p>
+				<div id="areaPie"></div>
+			</div>
+			<div class="controlled m-l-10 m-t-10 block-box float-l">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<p class="title">人群划分分析</p>
+				<div id="peoplebar"></div>
+			</div>
+		</div>
+		<div>
+			<div class="controlled m-t-10 block-box float-l">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<p class="title">受控区域分析</p>
+				<div id="areaRadar"></div>
+			</div>
+			<div class="controlled m-l-10 m-t-10 block-box float-l">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<p class="title">建筑分类统计</p>
+				<div id="buildingBar"></div>
+			</div>
+		</div>
+		<div class="block-box training">
+			<span class="top-right"></span>
+			<span class="bottom-left"></span>
+			<div id="training"></div>
+		</div>
+	</div>
+	<script type="text/javascript" src="../js/echarts.min.js"></script>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/nav.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var myChart = echarts.init(document.getElementById('areaPie'));
+			option = {
+			    series : [
+			        {
+			            type: 'pie',
+			            radius : '55%',
+			            center: ['50%', '45%'],
+			            data:[
+			                {
+			                	value:85,
+			                	name:'受控区',
+			                	label: {
+			                		color: '#ffffff'
+			                	},
+			                    itemStyle:{
+			                        color: '#4FC4F6'
+			                    }
+			                },
+			                {
+			                	value:15,
+			                	name:'失控区',
+			                	label: {
+			                		color: '#ffffff'
+			                	},
+			                    itemStyle:{
+			                        color: '#F7CB4A'
+			                    }
+			                }
+			            ],
+			            itemStyle: {
+			                emphasis: {
+			                    shadowBlur: 10,
+			                    shadowOffsetX: 0,
+			                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+			                }
+			            }
+			        }
+			    ]
+			};
+			myChart.setOption(option);
+			var myChart = echarts.init(document.getElementById('peoplebar'));
+			option = {
+				legend: {
+			        // x : 'left',
+			        // y : 'bottom',
+			        // textStyle: {
+			        // 	color: '#ffffff',
+			        // 	fontSize: '8px'
+			        // },
+			        data: ['正常', '孤寡老人', '儿童', '残障']
+			    },
+			    xAxis: {
+			        type: 'category',
+			        axisLine: {
+			        	lineStyle: {
+			        		color: '#ffffff'
+			        	}
+			        },
+			        data: ['正常', '孤寡老人', '儿童', '残障']
+			    },
+			    yAxis: {
+			        type: 'value',
+			        splitLine: {
+			        	show: false
+			        },
+			        axisLine: {
+			        	lineStyle: {
+			        		color: '#ffffff'
+			        	}
+			        }
+			    },
+			    series: [{
+			        data: [{
+			        	value: 150,
+			        	label: {
+			        		color: '#ffffff'
+			        	},itemStyle:{
+	                        color: '#8DFAFE'
+	                    }
+			        },{
+			        	value: 90,
+			        	label: {
+			        		color: '#ffffff'
+			        	},itemStyle:{
+	                        color: '#309EF5'
+	                    }
+			        },{
+			        	value: 30,
+			        	label: {
+			        		color: '#ffffff'
+			        	},itemStyle:{
+	                        color: '#31C5F9'
+	                    }
+			        },{
+			        	value: 10,
+			        	label: {
+			        		color: '#ffffff'
+			        	},itemStyle:{
+	                        color: '#17E3FB'
+	                    }
+			        }],
+			        type: 'bar',
+			        itemStyle: {   
+			            normal:{  
+			                color: function (params){
+			                    var colorList = ['rgb(164,205,238)','rgb(42,170,227)','rgb(25,46,94)','rgb(195,229,235)'];
+			                    return colorList[params.dataIndex];
+			                }
+			            },
+			            emphasis: {
+			                    shadowBlur: 10,
+			                    shadowOffsetX: 0,
+			                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+			            }
+			        }
+			    }]
+			};
+			myChart.setOption(option);
+
+			var myChart = echarts.init(document.getElementById('areaRadar'));
+			option = {
+			    legend: {
+			    	right: 0,
+			    	bottom: 50,
+			    	orient: 'vertical',
+			    	textStyle: {
+			    		color: '#ffffff'
+			    	},
+			        data: ['一级重点单位', '二级重点单位', '三级重点单位']
+			    },
+			    radar: {
+			        // shape: 'circle',
+			        name: {
+			            textStyle: {
+			                color: '#fff',
+			                // backgroundColor: '#999',
+			                // borderRadius: 3,
+			                // padding: [3, 5]
+			          }
+			        },
+			        indicator: [
+			           { name: '2012', max: 6500},
+			           { name: '2017', max: 16000},
+			           { name: '2016', max: 30000},
+			           { name: '2015', max: 38000},
+			           { name: '2014', max: 52000},
+			           { name: '2013', max: 25000}
+			        ]
+			    },
+			    series: [{
+			        type: 'radar',
+			        // areaStyle: {normal: {}},
+			        data : [
+			            {
+			                value : [4300, 10000, 28000, 35000, 50000, 19000],
+			                name : '一级重点单位',
+			                lineStyle: {
+			                    color: '#87EBDE'
+			                },itemStyle: {
+				                normal: {
+				                    color: '#87EBDE'
+				                }
+				            }
+			            },
+			             {
+			                value : [5000, 14000, 28000, 31000, 42000, 21000],
+			                name : '二级重点单位',
+			                lineStyle: {
+			                    color: '#FFBF03'
+			                },itemStyle: {
+				                normal: {
+				                    color: '#FFBF03'
+				                }
+				            }
+			            },
+			             {
+			                value : [4500, 9000, 25000, 26000, 40000, 15000],
+			                name : '三级重点单位',
+			                lineStyle: {
+			                    color: '#06BCCC'
+			                },
+				            itemStyle: {
+				                normal: {
+				                    color: '#06BCCC'
+				                }
+				            }
+			            }
+			        ]
+			    }]
+			};
+			myChart.setOption(option);
+			
+			var myChart = echarts.init(document.getElementById('buildingBar'));
+			option = {
+			    xAxis: {
+			        type: 'category',
+			        axisLine: {
+			        	lineStyle: {
+			        		color: '#ffffff'
+			        	}
+			        },
+			        data: ['高层建筑', '单多层建筑', '厂房仓库', '简易房', '公共娱乐场所']
+			    },
+			    yAxis: {
+			        type: 'value',
+			        splitLine: {
+			        	show: false
+			        },
+			        axisLine: {
+			        	lineStyle: {
+			        		color: '#ffffff'
+			        	}
+			        }
+			    },
+			    series: [{
+			        data: [{
+			        	value: 500,
+			        	label: {
+			        		color: '#ffffff'
+			        	},itemStyle:{
+	                        color: '#8DFAFE'
+	                    }
+			        },{
+			        	value: 380,
+			        	label: {
+			        		color: '#ffffff'
+			        	},itemStyle:{
+	                        color: '#309EF5'
+	                    }
+			        },{
+			        	value: 180,
+			        	label: {
+			        		color: '#ffffff'
+			        	},itemStyle:{
+	                        color: '#31C5F9'
+	                    }
+			        },{
+			        	value: 400,
+			        	label: {
+			        		color: '#ffffff'
+			        	},itemStyle:{
+	                        color: '#17E3FB'
+	                    }
+			        },{
+			        	value: 50,
+			        	label: {
+			        		color: '#ffffff'
+			        	},itemStyle:{
+	                        color: '#17E3FB'
+	                    }}],
+			        type: 'bar',
+			        itemStyle: {   
+			            normal:{  
+			                color: function (params){
+			                    var colorList = ['rgb(164,205,238)','rgb(42,170,227)','rgb(25,46,94)','rgb(195,229,235)'];
+			                    return colorList[params.dataIndex];
+			                }
+			            },
+			            emphasis: {
+			                    shadowBlur: 10,
+			                    shadowOffsetX: 0,
+			                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+			            }
+			        }
+			    }]
+			};
+			myChart.setOption(option);
+
+			var myChart = echarts.init(document.getElementById('training'));
+			option = {
+			    tooltip: {
+			        trigger: 'axis',
+			        axisPointer: {
+			            type: 'shadow'
+			        }
+			    },
+			    legend: {
+			        data: ['机关单位', '学校', '商业大厦', '写字楼', '九小场所', '三合一场所']
+			    },
+			    grid: {
+			        left: '3%',
+			        right: '4%',
+			        bottom: '3%',
+			        containLabel: true
+			    },
+			    yAxis: {
+			        type: 'value',
+			        boundaryGap: [0, 0.01],
+			        axisLine: {
+			        	lineStyle: {
+			        		color: '#ffffff'
+			        	}
+			        },
+			        splitLine: {
+			        	show: false
+			        }
+			    },
+			    xAxis: {
+			        type: 'category',
+			        data: ['2012','2013','2014','2015','2016','2017','2018'],
+			        axisLine: {
+			        	lineStyle: {
+			        		color: '#ffffff'
+			        	}
+			        }
+			    },
+			    series: [
+			        {
+			            name: '机关单位',
+			            type: 'bar',
+			            data: [350, 350, 350, 350, 350, 350, 350],
+			            itemStyle:{
+				           color: '#87EBDE'
+				       }
+			        },
+			        {
+			            name: '学校',
+			            type: 'bar',
+			            data: [250, 250, 250, 250, 250, 250, 250],
+			            itemStyle:{
+				           color: '#FF1B6D'
+				       }
+			        },
+			        {
+			            name: '商业大厦',
+			            type: 'bar',
+			            data: [150, 150, 150, 150, 150, 150, 150],
+			            itemStyle:{
+				           color: '#9599F3'
+				       }
+			        },
+			        {
+			            name: '写字楼',
+			            type: 'bar',
+			            data: [200, 200, 200, 200, 200, 200,200],
+			            itemStyle:{
+				           color: '#FFBF03'
+				       }
+			        },
+			        {
+			            name: '九小场所',
+			            type: 'bar',
+			            data: [200, 200, 200, 200, 200, 200,200],
+			            itemStyle:{
+				           color: '#5FAD47'
+				       }
+			        },
+			        {
+			            name: '三合一场所',
+			            type: 'bar',
+			            data: [80, 80, 80, 80, 80, 80, 80],
+			            itemStyle:{
+				           color: '#31C5F9'
+				       }
+			        }
+			    ]
+			};
+			myChart.setOption(option);
+			
+		})
+	</script>
+</body>
+</html>

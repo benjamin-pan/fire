@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">	
+	<title>火灾风险热力图</title>
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<style type="text/css">
+		.body {
+			margin-left: calc(50% - 697px);
+		}
+		.block-box-content {
+			overflow: hidden;
+			width: 100%;
+			height: 100%;
+		}
+		
+		
+		.years-of-fire-analysis {
+			margin-top: 10px;
+		}
+		.table-years-of-fire-analysis {
+			padding: 10px;
+			color: #ffffff;
+			font-size: 12px;
+		}
+		.table-title {
+			margin-top: 20px;
+			padding-left: 10px;
+			color: #ffffff;
+			width: calc(50% - 10px);
+			font-size: 14px;
+		}
+		.the-percentage {
+			height: 5px;
+			border-radius: 5px;
+			background-color: #51D7FF;
+		}
+		#death,#lost {
+			margin-top: 20px;
+			width: 50%;
+			height: 280px;
+		}
+		.left {
+			margin-top: 10px;
+			margin-right: 0;
+			width: 330px;
+		}
+		.center {
+			margin: 10px;
+			margin-right: 0;
+			width: 665px;
+		}
+		.right {
+			margin: 10px;
+			margin-right: 0;
+			width: 370px;
+		}
+		.map {
+			height: 550px;
+		}
+		#keyUnitStatistics {
+			height: 200px;
+		}
+		#areaPie {
+			height: 150px;
+		}
+		#peoplebar {
+			height: 150px;
+		}
+		.all-power {
+			margin-top: 10px;
+			height: 200px;
+			overflow: hidden;
+		}
+		.left-title {
+			padding: 3px 1px;
+			float: left;
+			margin-left: 20px;
+			margin-right: 20px;
+			background-color: #0C4C97;
+			color: #ffffff;
+			line-height: 1;
+			border-radius: 2px;
+		}
+		.title-line {
+			margin-top: 10px;
+			color: #ffffff;
+		}
+		.num,.unit {
+			text-align: center;
+		}
+		.sum {
+			font-size: 14px;
+		}
+		.unit {
+			font-size: 12px;
+		}
+		.right-content {
+			width: 550px;
+			overflow: hidden;
+			border: 1px solid #2CC6EA;
+			border-radius: 4px;
+		}
+		.last-box {
+			color: #ffffff;
+			height: 150px;
+			font-size: 14px;
+		}
+		.last-img {
+			height: 45px;
+		}
+		.last-box .float-l {
+			margin-top: 30px;
+			width: 50%;
+			text-align: center;
+		}
+		.img-fire {
+			height: 20px;
+		}
+		
+	</style>
+	<style type="text/css">
+	.mask {
+		position: relative;
+		top: -15px;
+	    height: 20px;
+	    width: 0;
+	    border-right: 35px solid #0071A7;
+	    border-top: 15px solid transparent;
+	    border-bottom: 15px solid transparent;
+	}
+	.mask.active {  
+	    border-right: 35px solid #0D3F78;
+	}
+	.mask.active:after {
+	    color: #51FFFF;
+	}
+	.mask-box {
+		margin: 10px;
+		width: 20px;
+	    height: 170px;
+	    width: 0;
+	    border-right: 35px solid #0071A7;
+	    border-top: 15px solid transparent;
+	    border-bottom: 15px solid transparent;
+	}
+	.mask:after {
+		display: block;
+		width: 30px;
+	    color: #1F3A67;
+		position: relative;
+		font-size: 10px;
+		top: 0px;
+		left: 6px;
+	}
+	.mask-first:after {
+		content: '实时';
+	}
+	.mask-second:after {
+		content: '年';
+		left: 10px;
+	}
+	.mask-third:after {
+		content: '月';
+		left: 10px;
+	}
+	.mask-forth:after {
+		content: '日';
+		left: 10px;
+	}
+	.mask-fifth:after {
+		content: '现役';
+	}
+	.mask-sixth:after {
+		content: '专职';
+	}
+	.mask-seventh:after {
+		content: '微站';
+	}
+	.mask-eight:after {
+		content: '专家';
+	}
+	.fire-rescue-statistics {
+		height: 250px;
+	}
+	.article {
+	    margin-top: 40px;
+	    display: inline-block;
+	    padding: 8px 10px;
+	    margin-left: 3px;
+	    border-left: 2px solid #16D6FF;
+	    background-color: #0C4C97;
+	    font-size: 10px;
+	    color: #FEFEFE;
+	    vertical-align: middle;
+	}
+	.content-block {
+		margin-top: 5px;
+		margin-left: 5px;
+		padding: 5px;
+		width: 50px;
+		text-align: center;
+		border-radius: 4px;
+		background-color: #2A5E9A;
+		color: #ffffff;
+		font-size: 12px;
+	}
+	.industry-box {
+		overflow: hidden;
+	}
+	.industry-title {
+		margin: 15px;
+		margin-top: 0;
+		width: 70px;
+		height: 38px;
+		line-height: 38px;
+		background-color: #0087E4;
+		color: #ffffff;
+		text-align: center;
+	}
+	.industry-content {
+		padding: 5px;
+		line-height: 13px;
+		width: 190px;
+		height: 28px;
+		background-color: #0087E4;
+		color: #ffffff;
+		font-size: 10px;
+	}
+	.search-box {
+		height: 37px;
+		color: #ffffff;
+	}
+	.search {
+		margin-left: 40px;
+		display: inline-block;
+		width: 280px;
+		height: 25px;
+		border: 1px solid #0097FF;
+		background-color: #0664FF;
+		border-radius: 25px;
+		text-align: center;
+		overflow: hidden;
+		position: relative;
+	}
+	.search>input {
+		width: 70%;
+		height: 25px;
+		border: none;
+		outline: none;
+		background-color: #0664FF;
+		color: #ffffff;
+		text-align: center;
+	}
+	.search>img {
+		position: absolute;
+		width: 100px;
+		top: -9px;
+		right: -53px;
+	}
+	.personnel-statistics {
+		height: 250px;
+	}
+	table {
+		width: 300px;
+	    position: relative;
+	    top: 10px;
+	    left: -10px;
+		background-color: #0C4C97;
+		color: #ffffff;
+		text-align: center;
+	}
+	thead td {
+		padding: 8px 5px;
+	}
+	td {
+		padding: 5px;
+	}
+</style>
+</head>
+<body>
+	<div class="header-nav">
+		<div class="header-content">
+			<div class="float-l web-name">智慧消防大数据云平台</div>
+			<div class="float-l contain">
+				<ul class="nav-list">
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-1.png">消防大数据</a>
+						<ul>
+							<li><a href="dataShow.html">基础数据显示</a></li>
+							<li><a href="yearsFire.html">历年火灾情况</a></li>
+							<li><a href="dataAnalysis.html">消防数据分析</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-2.png">火灾预警系统</a>
+						<ul>
+							<li><a href="fireAlarmAystem.html">火情预警系统</a></li>
+							<li><a href="fireRiskThermalDiagram.html">火灾风险热力图</a></li>
+							<li><a href="earlyWarningEquipmentStatus.html">预警设备状态</a></li>
+							<li><a href="historicalInformationQuery.html">历史信息查询</a></li>
+							<li><a href="showData.html">信息查看</a></li>
+							<li><a href="buildingPortrait.html">建筑画像</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-3.png">指挥调度系统</a>
+						<ul>
+							<li><a href="platformCommand.html">平台指挥</a></li>
+							<li><a href="monitoring.html">视频监控</a></li>
+							<li><a href="disposalReport.html">处置报告</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="float-l day-info">
+				<div>
+					<p>
+						<span class="m-r-5">2018.4.11</span>
+						<span class="m-r-5">星期三</span>
+						<span> 9:14:56</span>
+					</p>
+					<p class="m-t-5">
+						<span class="p-r-5 border-right"><img class="icon-img" src="../img/icon-weather.png">15℃</span>
+						<span class="p-r-5 p-l-5 border-right"><img class="icon-img" src="../img/icon-humidity.png">37%</span>
+						<span class="p-l-5">东北风三级</span>
+					</p>
+				</div>
+			</div>
+			<div class="float-l">
+				<div class="float-l">
+					<img class="login-button" src="../img/login-button.png">
+				</div>
+				<div class="float-l">
+					<img class="set-button" src="../img/seting.png">
+				</div>
+			</div>
+		</div>
+		<div class="second-bg"></div>
+	</div>
+	<div class="body">
+		<div class="float-l left">
+			<div class="block-box fire-rescue-statistics">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<div class="block-box-content">
+					<p class="title">警情统计</p>
+					<div class="mask-box float-l">
+						<div class="mask float-l mask-first"></div>
+						<div class="mask float-l mask-second"></div>
+						<div class="mask float-l mask-third active"></div>
+						<div class="mask float-l mask-forth"></div>
+					</div>
+					<div class="article">
+						<p class="float-l">火灾</p>
+						<p class="content-block float-r">1302</p>
+					</div>
+					<div class="article">
+						<p class="float-l">社会<br>救助</p>
+						<p class="content-block float-r">213</p>
+					</div>
+					<div class="article">
+						<p class="float-l">抢险<br>救援</p>
+						<p class="content-block float-r">347</p>
+					</div>
+					<div class="article">
+						<p class="float-l">公务<br>执勤</p>
+						<p class="content-block float-r">1357</p>
+					</div>
+				</div>
+			</div>
+			<div class="block-box years-of-fire-analysis">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<div class="block-box-content">
+					<p class="title">历年火灾分析</p>
+					<div class="industry-box m-t-20">
+						<div class="industry-title float-l">建筑信息</div>
+						<div class="industry-content float-l">金泽国际酒店的建筑信息已 水泥钢筋结构为主</div>
+					</div>
+					<div class="industry-box">
+						<div class="industry-title float-l">消防设施</div>
+						<div class="industry-content float-l">消防栓3个，泡沫灭火器10个</div>
+					</div>
+					<div class="industry-box">
+						<div class="industry-title float-l">预案</div>
+						<div class="industry-content float-l">2018-3-23号预案</div>
+					</div>
+					<div class="industry-box">
+						<div class="industry-title float-l">辖区信息</div>
+						<div class="industry-content float-l">金泽国际酒店位于中山东路平安大街 交叉口</div>
+					</div>
+					<div class="industry-box">
+						<div class="industry-title float-l">单位信息</div>
+						<div class="industry-content float-l">以酒店经营住宿、餐饮娱乐为一体 的经营企业。</div>
+					</div>
+					<!-- <div class="float-l table-title">
+						火灾原因分析
+					</div>
+					<div class="float-l table-title">
+						火灾场所分布
+					</div>
+					<table class="table-years-of-fire-analysis">
+						<thead>
+							<tr>
+								<td width="15%"></td>
+								<td width="35%"></td>
+								<td width="15%"></td>
+								<td width="35%"></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<div class="the-percentage" style="width: 70%;"></div>
+								</td>
+								<td>电器35%</td>
+								<td>
+									<div class="the-percentage" style="width: 60%;"></div>
+								</td>
+								<td>物资仓储场所30%</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="the-percentage" style="width: 40%;"></div>
+								</td>
+								<td>吸烟20%</td>
+								<td>
+									<div class="the-percentage" style="width: 50%;"></div>
+								</td>
+								<td>公共娱乐场所25%</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="the-percentage" style="width: 30%;"></div>
+								</td>
+								<td>放火15%</td>
+								<td>
+									<div class="the-percentage" style="width: 14%;"></div>
+								</td>
+								<td>文化场所7%</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="the-percentage" style="width: 20%;"></div>
+								</td>
+								<td>生产作业10%</td>
+								<td>
+									<div class="the-percentage" style="width: 30%;"></div>
+								</td>
+								<td>垃圾废弃物15%</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="the-percentage" style="width: 16%;"></div>
+								</td>
+								<td>生活用火不慎8%</td>
+								<td>
+									<div class="the-percentage" style="width: 20%;"></div>
+								</td>
+								<td>生产工地10%</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="the-percentage" style="width: 24%;"></div>
+								</td>
+								<td>其他12%</td>
+								<td>
+									<div class="the-percentage" style="width: 26%;"></div>
+								</td>
+								<td>其他13%</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="float-l" id="death">饼图</div>
+					<div class="float-l" id="lost">饼图</div> -->
+				</div>
+			</div>
+		</div>
+		<div class="float-l center">
+			<div class="block-box map">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+			</div>
+			<!-- <div class="block-box all-power">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<p class="title">全市消防力量</p>
+				<div class="title-line m-t-20">
+					<div class="left-title">
+						<p>消部</p>
+						<p>防队</p>
+					</div>
+					<div class="right-content">
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">1</p>
+							<p class="unit">支队</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">1</p>
+							<p class="unit">大队</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">1</p>
+							<p class="unit">执勤中队</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">1</p>
+							<p class="unit">消防警力总数</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">1</p>
+							<p class="unit">现役</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">1</p>
+							<p class="unit">非现役</p>
+						</div>
+					</div>
+				</div>
+				<div class="title-line">
+					<div class="left-title">
+						<p>消单</p>
+						<p>防位</p>
+					</div>
+					<div class="right-content width">
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">20</p>
+							<p class="unit">重点单位</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">35</p>
+							<p class="unit">派出所重点监管</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">12</p>
+							<p class="unit">木质结构连片区</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">246</p>
+							<p class="unit">劳动密集型企业</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">14</p>
+							<p class="unit">工业园区</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">463</p>
+							<p class="unit">高层建筑</p>
+						</div>
+					</div>
+				</div>
+				<div class="title-line">
+					<div class="left-title">
+						<p>人装</p>
+						<p>员备</p>
+					</div>
+					<div class="right-content">
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">5</p>
+							<p class="unit">政府专职消防队</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">500</p>
+							<p class="unit">队员</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">35</p>
+							<p class="unit">行政车辆</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">20</p>
+							<p class="unit">执勤消防车</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">2133</p>
+							<p class="unit">防护装备</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">2012</p>
+							<p class="unit">抢险救援器材</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">3456</p>
+							<p class="unit">灭火类器材</p>
+						</div>
+					</div>
+				</div>
+			</div> -->
+		</div>
+		<div class="float-l right">
+			<div class="search-box">
+				<!-- <img src="../img/fire.png" class="img-fire"> -->
+				<!-- <span>搜索信息</span> -->
+				<div class="search">
+					<input type="input" value="搜索信息">
+					<img src="../img/search.png">
+				</div>
+			</div>
+			<div class="block-box personnel-statistics">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<p class="title">人员统计</p>
+				<div class="mask-box float-l">
+					<div class="mask float-l mask-fifth"></div>
+					<div class="mask float-l mask-sixth"></div>
+					<div class="mask float-l mask-seventh active"></div>
+					<div class="mask float-l mask-eight"></div>
+				</div>
+				<table>
+					<thead>
+						<tr>
+							<td>中队</td>
+							<td>人员</td>
+							<td>车辆</td>
+							<td>药剂</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>泡沫灭火编队</td>
+							<td>1024</td>
+							<td>1335</td>
+							<td>1033</td>
+						</tr>
+						<tr>
+							<td>抢险编队</td>
+							<td>356</td>
+							<td>579</td>
+							<td>1033</td>
+						</tr>
+						<tr>
+							<td>高喷编队</td>
+							<td>105</td>
+							<td>1335</td>
+							<td>1033</td>
+						</tr>
+						<tr>
+							<td>抢险编队</td>
+							<td>1024</td>
+							<td>1335</td>
+							<td>1033</td>
+						</tr>
+						<tr>
+							<td>高喷编队</td>
+							<td>1024</td>
+							<td>1335</td>
+							<td>1033</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="block-box m-t-10">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<p class="title">高危地区场所分布图</p>
+				<div id="areaPie"></div>
+				<!-- <div id="peoplebar"></div> -->
+			</div>
+			<!-- <div class="block-box m-t-10 last-box">
+			<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<p class="title">今日采集情况</p>
+				<div class="float-l">
+					<img class="last-img" src="../img/img-chart.png">
+					<p>物联设备 3599</p>
+				</div>
+				<div class="float-l">
+					<img class="last-img" src="../img/img-fixed.png">
+					<p>消防主机  500</p>
+				</div>
+			</div> -->
+		</div>
+	</div>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/echarts.common.min.js"></script>
+	<script type="text/javascript" src="../js/deathAndLost.js"></script>
+	<script type="text/javascript" src="../js/nav.js"></script>
+	<script type="text/javascript">
+		var myChart = echarts.init(document.getElementById('areaPie'));
+		option = {
+		    legend: {
+		    	// orient: 'vertical',
+		        bottom: 10,
+		        left: 'center',
+		        textStyle: {
+		        	color: '#ffffff'
+		        },
+		        // formatter: function(value){
+		        //     var data=option.series[0].data;
+		        //     var sum=0;
+		        //     for(var i=0;i<data.length;i++){
+		        //         sum+=data[i].value
+		        //     }
+		        //     for(var j=0;j<data.length;j++){
+		        //         if(value===data[j].name){
+		        //             return data[j].value/sum*100+'% '+value;
+		        //         }
+		        //     }
+		        // },
+		        data: ['简易房','住宅','仓库','中转站','历史旧址']
+		    },
+		    series : [
+		        {
+		            type: 'pie',
+		            radius : '60%',
+		            center: ['50%', '35%'],
+		            selectedMode: 'single',
+		            label: {
+		                normal: {
+		                    position: 'inner',
+		                    formatter: "{d}%"
+		                }
+		            },
+		            data:[
+		                {value:60,name: '简易房',
+		                    itemStyle:{
+		                        color: '#4FC4F6'
+		                    }
+		                },
+		                {value:25, name: '住宅',
+		                    itemStyle:{
+		                        color: '#E64C65'
+		                    }
+		                },
+		                {value:12, name: '仓库',
+		                    itemStyle:{
+		                        color: '#FCB150'
+		                    }
+		                },
+		                {value:3, name: '中转站',
+		                    itemStyle:{
+		                        color: '#11A8AB'
+		                    }
+		                },
+		                {value:20, name: '历史旧址',
+		                    itemStyle:{
+		                        color: '#F7CB4A'
+		                    }
+		                }
+		            ],
+		            itemStyle: {
+		                emphasis: {
+		                    shadowBlur: 10,
+		                    shadowOffsetX: 0,
+		                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+		                }
+		            }
+		        }
+		    ]
+		};
+		myChart.setOption(option);
+	</script>
+</body>
+</html>

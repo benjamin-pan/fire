@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">	
+	<title>火情预警系统</title>
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<link rel="stylesheet" type="text/css" href="../css/page.css">
+	<style type="text/css">
+		#trend {
+			height: 200px;
+		}
+		.body {
+			margin-left: calc(50% - 697px);
+		}
+		.block-box-content {
+			overflow: hidden;
+			width: 100%;
+			height: 100%;
+		}
+		.fire-rescue-statistics {
+			height: 210px;
+		}
+		.years-of-fire-analysis {
+			margin-top: 10px;
+		}
+		.the-percentage {
+			height: 5px;
+			border-radius: 5px;
+			background-color: #51D7FF;
+		}
+		.left {
+			margin-top: 10px;
+			margin-right: 0;
+			width: 405px;
+		}
+		.center {
+			margin: 10px;
+			margin-right: 0;
+			width: 568px;
+		}
+		.right {
+			margin: 10px;
+			margin-right: 0;
+			width: 402px;
+		}
+		.capsule {
+			margin: 20px 0 0 10px;
+			width: 100px;
+			height: 25px;
+			display: inline-block;
+			background-color: #1b597e;
+			border-radius: 25px;
+			font-size: 18px;
+			color: #02959B;
+			text-align: center;
+		}
+		.capsule.active {
+			color: #98FBFF;
+		}
+		.smooke-box,.electrical-box,.manual-box,.gas-box {
+			text-align: center;
+		}
+		.smooke-box>img {
+			margin-top: 10px;
+			width: 28px;
+		}
+		.electrical-box>img,.manual-box>img {
+			margin-top: 10px;
+			width: 30px;
+		}
+		.gas-box>img {
+			margin-top: 20px;
+			width: 30px;
+		}
+		.smooke-box>p,.electrical-box>p,.manual-box>p,.gas-box>p {
+			color: #3EF3D1;
+		}
+		.text-box {
+			text-align: left;
+			padding-left: 6px;
+			font-size: 10px;
+			color: #ffffff;
+		}
+		.text-box>p {
+			margin-top: 3px;
+		}
+		.tip-box {
+			position: relative;
+			margin: 10px 5px;
+			padding-left: 10px;
+			border: 1px solid #01FBFE;
+			height: 103px;
+		}
+		.tip-box>span {
+		    position: absolute;
+		    content: '';
+		    display: inline-block;
+		    width: 10px;
+		    height: 10px;
+		}
+		.tip-box>span.top-left {
+		    top: -3px;
+		    margin-left: -13px;
+		    background: url(../img/top-left.png) no-repeat 100% 100% /10px 10px;
+		}
+		.tip-box>span.top-right {
+		    top: -3px;
+		    left: 100%;
+		    margin-left: -7px;
+		    background: url(../img/top-right.png) no-repeat 100% 100% /10px 10px;
+		}
+		.tip-box>span.bottom-left {
+		    top: 100%;
+		    margin-left: -1px;
+    		margin-top: -6px;
+		    background: url(../img/bottom-left.png) no-repeat 100% 100% /10px 10px;
+		}
+		.tip-box>span.bottom-right {
+		    top: 100%;
+		    left: 100%;
+		    margin-top: -7px;
+		    margin-left: -7px;
+		    background: url(../img/bottom-right.png) no-repeat 100% 100% /10px 10px;
+		}
+		.num:before,.addr:before,.time:before,.what:before,.concentration:before {
+			width: 10px;
+			height: 10px;
+			top: 0;
+			left: 0;
+			content: '';
+			background: url(../img/block-box-top-left.png) no-repeat 100% 100% /10px 10px;
+			display: inline-block;
+		}
+		.num:before {
+			background: url(../img/color-page.png) no-repeat 100% 100% /10px 10px;
+		}
+		.addr:before {
+			background: url(../img/color-location.png) no-repeat 100% 100% /10px 10px;
+		}
+		.time:before {
+			background: url(../img/color-clock.png) no-repeat 100% 100% /10px 10px;
+		}
+		.what:before {
+			background: url(../img/color-certificate.png) no-repeat 100% 100% /10px 10px;
+		}
+		.concentration:before {
+			background: url(../img/color-bar.png) no-repeat 100% 100% /10px 10px;
+		}
+		.button {
+			margin-top: 10px;
+			margin-left: 5px;
+			width: 40px;
+			text-align: center;
+			background-color: #02959B;
+			font-size: 10px;
+			color: #255B7A;
+		}
+		.button.active {
+			margin-top: 30px;
+			color: #ffffff;
+		}
+		.tip-box>.float-r {
+			margin-right: 5px;
+		}
+		#map {
+			height: 550px;
+			border: 1px solid #3c6ea7;
+			border-radius: 4px;
+		}
+		.center>.block-box {
+			float: left;
+			width: 182px;
+			margin-top: 10px;
+			height: 200px;
+		}
+		.all-power {
+			margin-left: 8px;
+		}
+		.title-second {
+		    width: 150px;
+		    height: 24px;
+		    line-height: 24px;
+		    background: url(../img/title-second.png) no-repeat 100% 100% /150px 24px;
+		    text-align: center;
+		}
+		.warning {
+			padding: 10px;
+		}
+		.font-style {
+			margin: 7px 0;
+			color: #3EF3D1;
+			font-size: 10px;
+		}
+		.percentage {
+			color: #5BFEFD;
+			font-size: 14px;
+			margin-top: 5px;
+		}
+		#characteristics {
+			height: 200px;
+		}
+		#keyUnitStatistics {
+			margin-top: 10px;
+		}
+		#keyUnitStatistics>img {
+			margin: 10px 0 0 20px;
+			height: 20px;
+		}
+		.information {
+			margin: 10px;
+			width: 345px;
+			color: #01FBFE;
+			font-size: 12px;
+			text-align: center;
+			border: 1px solid #01FBFE;
+		}
+		#connection {
+			height: 200px;
+		}
+	</style>
+</head>
+<body>
+	<div class="header-nav">
+		<div class="header-content">
+			<div class="float-l web-name">智慧消防大数据云平台</div>
+			<div class="float-l contain">
+				<ul class="nav-list">
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-1.png">消防大数据</a>
+						<ul>
+							<li><a href="dataShow.html">基础数据显示</a></li>
+							<li><a href="yearsFire.html">历年火灾情况</a></li>
+							<li><a href="dataAnalysis.html">消防数据分析</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-2.png">火灾预警系统</a>
+						<ul>
+							<li><a href="fireAlarmAystem.html">火情预警系统</a></li>
+							<li><a href="fireRiskThermalDiagram.html">火灾风险热力图</a></li>
+							<li><a href="earlyWarningEquipmentStatus.html">预警设备状态</a></li>
+							<li><a href="historicalInformationQuery.html">历史信息查询</a></li>
+							<li><a href="showData.html">信息查看</a></li>
+							<li><a href="buildingPortrait.html">建筑画像</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-3.png">指挥调度系统</a>
+						<ul>
+							<li><a href="platformCommand.html">平台指挥</a></li>
+							<li><a href="monitoring.html">视频监控</a></li>
+							<li><a href="disposalReport.html">处置报告</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="float-l day-info">
+				<div>
+					<p>
+						<span class="m-r-5">2018.4.11</span>
+						<span class="m-r-5">星期三</span>
+						<span> 9:14:56</span>
+					</p>
+					<p class="m-t-5">
+						<span class="p-r-5 border-right"><img class="icon-img" src="../img/icon-weather.png">15℃</span>
+						<span class="p-r-5 p-l-5 border-right"><img class="icon-img" src="../img/icon-humidity.png">37%</span>
+						<span class="p-l-5">东北风三级</span>
+					</p>
+				</div>
+			</div>
+			<div class="float-l">
+				<div class="float-l">
+					<img class="login-button" src="../img/login-button.png">
+				</div>
+				<div class="float-l">
+					<img class="set-button" src="../img/seting.png">
+				</div>
+			</div>
+		</div>
+		<div class="second-bg"></div>
+	</div>
+	<div class="body">
+		<div class="float-l left">
+			<div class="block-box fire-rescue-statistics">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<div class="block-box-content">
+					<p class="title">设备接入统计</p>
+					<div id="trend"></div>
+				</div>
+			</div>
+			<div class="block-box years-of-fire-analysis">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<div class="block-box-content">
+					<p class="title">实时报警</p>
+					<div>
+						<div class="capsule active">未解除</div>
+						<div class="capsule">已解除</div>
+						<div class="capsule">已确认</div>
+					</div>
+					<div class="tip-box">
+						<span class="top-left"></span>
+						<span class="top-right"></span>
+						<span class="bottom-left"></span>
+						<span class="bottom-right"></span>
+						<div class="smooke-box float-l">
+							<img src="../img/smooke-warning.png">
+							<p>烟雾警报</p>
+						</div>
+						<div class="text-box float-l">
+							<p class="num">86370325964789654</p>
+							<p class="addr">陕西省延安市中华大街水榭花都14-2-2013</p>
+							<p class="time">2018.4.13   15:46:32</p>
+							<p class="what">报警超时，状态异常！</p>
+							<p class="concentration">浓度：60%</p>
+						</div>
+						<div class="float-r">
+							<div class="button active">解除</div>
+							<div class="button">确认</div>
+						</div>
+					</div>
+					<div class="tip-box">
+						<span class="top-left"></span>
+						<span class="top-right"></span>
+						<span class="bottom-left"></span>
+						<span class="bottom-right"></span>
+						<div class="electrical-box float-l">
+							<img src="../img/electrical-warning.png">
+							<p>电气报警</p>
+						</div>
+						<div class="text-box float-l">
+							<p class="num">86370325964789654</p>
+							<p class="addr">陕西省延安市宝塔区科技园</p>
+							<p class="time">2018.4.13   15:46:32</p>
+							<p class="what">备注</p>
+							<p class="concentration">浓度：60%</p>
+						</div>
+						<div class="float-r">
+							<div class="button active">解除</div>
+							<div class="button">确认</div>
+						</div>
+					</div>
+					<div class="tip-box">
+						<span class="top-left"></span>
+						<span class="top-right"></span>
+						<span class="bottom-left"></span>
+						<span class="bottom-right"></span>
+						<div class="manual-box float-l">
+							<img src="../img/manual-warning.png">
+							<p>手动报警</p>
+						</div>
+						<div class="text-box float-l">
+							<p class="num">86370325964789654</p>
+							<p class="addr">陕西省延安市平安公园</p>
+							<p class="time">2018.4.13   15:46:32</p>
+							<p class="what">报警超时，状态异常！</p>
+							<p class="concentration">浓度：60%</p>
+						</div>
+						<div class="float-r">
+							<div class="button active">解除</div>
+							<div class="button">确认</div>
+						</div>
+					</div>
+					<div class="tip-box">
+						<span class="top-left"></span>
+						<span class="top-right"></span>
+						<span class="bottom-left"></span>
+						<span class="bottom-right"></span>
+						<div class="gas-box float-l">
+							<img src="../img/gas-warning.png">
+							<p>燃气报警</p>
+						</div>
+						<div class="text-box float-l">
+							<p class="num">86370325964789654</p>
+							<p class="addr">陕西省延安市中华大街光华小区19-1-305</p>
+							<p class="time">2018.4.13   15:46:32</p>
+							<p class="what">备注</p>
+							<p class="concentration">浓度：60%</p>
+						</div>
+						<div class="float-r">
+							<div class="button active">解除</div>
+							<div class="button">确认</div>
+						</div>
+					</div>
+				</div>
+				<div class="pagnation" id="pagnation">
+					<a href="#" target="_blank" class="page-prev">上一页</a>
+					<a href="#" target="_blank" class="current">1</a>
+					<a href="#" target="_blank">2</a>
+					<a href="#" target="_blank">3</a>
+					<a href="#" target="_blank">4</a>
+					<a href="#" target="_blank">5</a>
+					<a href="#" target="_blank">...</a>
+					<a href="#" target="_blank">13</a>
+					<a href="#" target="_blank" class="page-next">下一页</a>
+				</div>
+			</div>
+		</div>
+		<div class="float-l center">
+			<div id="map">
+			</div>
+			<div class="block-box">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<p class="title-second">报警数量</p>
+				<table class="warning">
+					<thead>
+						<tr>
+							<td width="150px"></td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<p class="font-style">实时报警</p>
+								<div class="the-percentage" style="width: 20%;"></div>
+							</td>
+							<td class="percentage">20</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="font-style">实时报警</p>
+								<div class="the-percentage" style="width: 30%;"></div>
+							</td>
+							<td class="percentage">30</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="font-style">实时报警</p>
+								<div class="the-percentage" style="width: 10%;"></div>
+							</td>
+							<td class="percentage">10</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="font-style">实时报警</p>
+								<div class="the-percentage" style="width: 1%;"></div>
+							</td>
+							<td class="percentage">1</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="block-box all-power">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<p class="title-second">接通率</p>
+				<div id="connection"></div>
+			</div>
+			<div class="block-box all-power">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<p class="title-second">设备状态统计</p>
+				<div id="characteristics">
+					
+				</div>
+			</div>
+		</div>
+		<div class="float-l right">
+			<div class="block-box">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<p class="title">信息查看</p>
+				<div id="keyUnitStatistics">
+					<img src="../img/new.png">
+					<img src="../img/modify.png">
+					<img src="../img/delete.png">
+				</div>
+				<table class="information">
+					<tbody>
+						<tr>
+							<td>名称</td>
+							<td>区域</td>
+							<td>楼层数</td>
+						</tr>
+						<tr>
+							<td>凤凰国际</td>
+							<td>宝塔区</td>
+							<td>25</td>
+						</tr>
+						<tr>
+							<td>丽融大厦</td>
+							<td>宝塔区</td>
+							<td>15</td>
+						</tr>
+						<tr>
+							<td>国贸宾馆</td>
+							<td>宝塔区</td>
+							<td>13</td>
+						</tr>
+						<tr>
+							<td>中古楼商厦</td>
+							<td>宝塔区</td>
+							<td>30</td>
+						</tr>
+						<tr>
+							<td>延百集团</td>
+							<td>宝塔区</td>
+							<td>20</td>
+						</tr>
+						<tr>
+							<td>金泽国际酒店</td>
+							<td>宝塔区</td>
+							<td>26</td>
+						</tr>
+						<tr>
+							<td>金泽国际酒店</td>
+							<td>宝塔区</td>
+							<td>26</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="block-box years-of-fire-analysis">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<div class="block-box-content">
+					<p class="title">历史报警信息</p>
+					<div class="tip-box">
+						<span class="top-left"></span>
+						<span class="top-right"></span>
+						<span class="bottom-left"></span>
+						<span class="bottom-right"></span>
+						<div class="smooke-box float-l">
+							<img src="../img/smooke-warning.png">
+							<p>烟雾警报</p>
+						</div>
+						<div class="text-box float-l">
+							<p class="num">86370325964789654</p>
+							<p class="addr">陕西省延安市中华大街水榭花都14-2-2013</p>
+							<p class="time">2018.4.13   15:46:32</p>
+							<p class="what">报警超时，状态异常！</p>
+							<p class="concentration">浓度：60%</p>
+						</div>
+						<div class="float-r">
+							<div class="button active">解除</div>
+							<div class="button">确认</div>
+						</div>
+					</div>
+					<div class="tip-box">
+						<span class="top-left"></span>
+						<span class="top-right"></span>
+						<span class="bottom-left"></span>
+						<span class="bottom-right"></span>
+						<div class="electrical-box float-l">
+							<img src="../img/electrical-warning.png">
+							<p>电气报警</p>
+						</div>
+						<div class="text-box float-l">
+							<p class="num">86370325964789654</p>
+							<p class="addr">陕西省延安市宝塔区科技园</p>
+							<p class="time">2018.4.13   15:46:32</p>
+							<p class="what">备注</p>
+							<p class="concentration">浓度：60%</p>
+						</div>
+						<div class="float-r">
+							<div class="button active">解除</div>
+							<div class="button">确认</div>
+						</div>
+					</div>
+					<div class="tip-box">
+						<span class="top-left"></span>
+						<span class="top-right"></span>
+						<span class="bottom-left"></span>
+						<span class="bottom-right"></span>
+						<div class="manual-box float-l">
+							<img src="../img/manual-warning.png">
+							<p>手动报警</p>
+						</div>
+						<div class="text-box float-l">
+							<p class="num">86370325964789654</p>
+							<p class="addr">陕西省延安市平安公园</p>
+							<p class="time">2018.4.13   15:46:32</p>
+							<p class="what">报警超时，状态异常！</p>
+							<p class="concentration">浓度：60%</p>
+						</div>
+						<div class="float-r">
+							<div class="button active">解除</div>
+							<div class="button">确认</div>
+						</div>
+					</div>
+					<div class="tip-box">
+						<span class="top-left"></span>
+						<span class="top-right"></span>
+						<span class="bottom-left"></span>
+						<span class="bottom-right"></span>
+						<div class="gas-box float-l">
+							<img src="../img/gas-warning.png">
+							<p>燃气报警</p>
+						</div>
+						<div class="text-box float-l">
+							<p class="num">86370325964789654</p>
+							<p class="addr">陕西省延安市中华大街光华小区19-1-305</p>
+							<p class="time">2018.4.13   15:46:32</p>
+							<p class="what">备注</p>
+							<p class="concentration">浓度：60%</p>
+						</div>
+						<div class="float-r">
+							<div class="button active">解除</div>
+							<div class="button">确认</div>
+						</div>
+					</div>
+				</div>
+				<div class="pagnation" id="">
+					<a href="#" target="_blank" class="page-prev">上一页</a>
+					<a href="#" target="_blank" class="current">1</a>
+					<a href="#" target="_blank">2</a>
+					<a href="#" target="_blank">3</a>
+					<a href="#" target="_blank">4</a>
+					<a href="#" target="_blank">5</a>
+					<a href="#" target="_blank">...</a>
+					<a href="#" target="_blank">13</a>
+					<a href="#" target="_blank" class="page-next">下一页</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/echarts.min.js"></script>
+	<script type="text/javascript" src="../js/nav.js"></script>
+	<script type="text/javascript">
+		var myChart = echarts.init(document.getElementById('trend'));
+
+		var dataAxis = ['烟感', '燃气', '电气', '手报', '消防水\n系统监测', '声光', '消火栓'];
+		var data = [150, 300, 250, 90, 240, 330, 95, 110, 60, 140];
+		var yMax = 500;
+		var dataShadow = [];
+
+		for (var i = 0; i < data.length; i++) {
+		    dataShadow.push(yMax);
+		}
+
+		option = {
+			title: {
+		        text: '数量/探测器类型',
+		        textStyle: {
+		        	color: '#98FBFF',
+		        	fontSize: '20px'
+		        },
+		        left: '50px',
+		        top: '10px'
+		    },
+		    xAxis: {
+		        data: dataAxis,
+		        axisLabel: {
+		            textStyle: {
+		                color: '#fff',
+		                fontSize: '8px'
+		            }
+		        },
+		        axisLine: {
+		        	lineStyle:{
+		        		color: '#fff'
+		        	}
+		        },
+		        z: 10
+		    },
+		    yAxis: {
+		        axisLine: {
+		        	lineStyle:{
+		        		color: '#fff'
+		        	}
+		        },
+		        splitLine: {
+		            show: false
+		        },
+		        axisLabel: {
+		            textStyle: {
+		                color: '#fff'
+		            }
+		        }
+		    },
+		    dataZoom: [
+		        {
+		            type: 'inside'
+		        }
+		    ],
+		    series: [
+		        {
+		            type: 'bar',
+		            barWidth:10,
+		            itemStyle: {
+		                // barBorderRadius: 4,
+		                normal: {
+		                    color: new echarts.graphic.LinearGradient(
+		                        0, 0, 0, 1,
+		                        [
+		                            {offset: 0, color: '#43FFD7'},
+		                            {offset: 1, color: '#00C7D4'}
+		                        ]
+		                    )
+		                }
+		            },
+		            data: data
+		        }
+		    ]
+		};
+		myChart.setOption(option);
+
+		var myChart = echarts.init(document.getElementById('characteristics'));
+		var dataAxis = ['在线', '离线', '故障'];
+		var data = [2100, 400, 100];
+		var yMax = 500;
+		var dataShadow = [];
+
+		for (var i = 0; i < data.length; i++) {
+		    dataShadow.push(yMax);
+		}
+
+		option = {
+			grid: {
+		        left: '10px',
+		        right: '10px',
+		        bottom: '30px',
+		        top: '10px',
+		        containLabel: true
+		    },
+		    xAxis: {
+		        data: dataAxis,
+		        axisLabel: {
+		            textStyle: {
+		                color: '#fff'
+		            }
+		        },
+		        axisLine: {
+		        	lineStyle:{
+		        		color: '#fff'
+		        	}
+		        },
+		        z: 10
+		    },
+		    yAxis: {
+		        axisLine: {
+		        	lineStyle:{
+		        		color: '#fff'
+		        	}
+		        },
+		        splitLine: {
+		            show: false
+		        },
+		        axisLabel: {
+		            textStyle: {
+		                color: '#fff'
+		            }
+		        }
+		    },
+		    dataZoom: [
+		        {
+		            type: 'inside'
+		        }
+		    ],
+		    series: [
+		        {
+		            type: 'bar',
+		            barWidth:10,
+		            itemStyle: {
+		                // barBorderRadius: 4,
+		                normal: {
+		                    color: new echarts.graphic.LinearGradient(
+		                        0, 0, 0, 1,
+		                        [
+		                            {offset: 0, color: '#BB6EE5'},
+		                            {offset: 1, color: '#1BE3E7'}
+		                        ]
+		                    )
+		                }
+		            },
+		            data: data
+		        }
+		    ]
+		};
+		myChart.setOption(option);
+
+		var myChart = echarts.init(document.getElementById('connection'));
+		option = {
+		    // tooltip : {
+		    //     formatter: "{a} <br/>{b} : {c}%"
+		    // },
+		    series: [
+		        {
+		            name: '业务指标',
+		            type: 'gauge',
+		            radius: '90%',
+		            // detail: {formatter:'{value}%'},
+		            data: [{value: 50}]
+		        }
+		    ]
+		};
+		myChart.setOption(option);
+
+	</script>
+</body>
+</html>

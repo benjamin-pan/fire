@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">	
+	<title>处置报告</title>
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<style type="text/css">
+		.body {
+			margin-left: calc(50% - 696px);
+		}
+		.img-report {
+			margin: 20px 60px 80px 0;
+			width: 180px;
+		}
+		.first-box {
+			margin: 10px auto;
+			width: 1390px;
+			height: 530px;
+			text-align: center;
+			color: #ffffff;
+		}
+		.time-line {
+			width: 1200px;
+			margin: 70px auto;
+			overflow: hidden;
+		}
+		.small-circle {
+			position: relative;
+			top: 115px;
+			width: 14px;
+			height: 14px;
+			margin: 0 auto;
+			border-radius: 14px;
+			background-color: #13B3D0;
+		}
+		.circle {
+			width: 30px;
+			height: 30px;
+			margin: 0 auto;
+			border-radius: 30px;
+			background-color: #13B3D0;
+		}
+		.tip {
+			position: relative;
+			margin-left: 45px;
+			float: left;
+			width: 110px;
+			text-align: center;
+			height: auto;
+		}
+		.tip:not(:first-child) {
+			margin-left: 90px;
+		}
+		.what {
+			margin-top: 5px;
+			font-size: 14px;
+		}
+		.ditail {
+			margin-top: 10px;
+			font-size: 12px;
+		}
+		.line:before {
+			top: 35px;
+			left: -140px;
+			position: absolute;
+			display: block;
+			content: '';
+			width: 200px;
+			border-top: 2px solid #13B3D0;
+		}
+		.line:after {
+			top: 35px;
+			left: 54px;
+			position: absolute;
+			display: block;
+			content: '';
+			height: 130px;
+			border-left: 2px solid #13B3D0;
+		}
+		.small-circle+.what {
+			margin-top: 120px;
+		}
+	</style>
+</head>
+<body>
+	<div class="header-nav">
+		<div class="header-content">
+			<div class="float-l web-name">智慧消防大数据云平台</div>
+			<div class="float-l contain">
+				<ul class="nav-list">
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-1.png">消防大数据</a>
+						<ul>
+							<li><a href="dataShow.html">基础数据显示</a></li>
+							<li><a href="yearsFire.html">历年火灾情况</a></li>
+							<li><a href="dataAnalysis.html">消防数据分析</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-2.png">火灾预警系统</a>
+						<ul>
+							<li><a href="fireAlarmAystem.html">火情预警系统</a></li>
+							<li><a href="fireRiskThermalDiagram.html">火灾风险热力图</a></li>
+							<li><a href="earlyWarningEquipmentStatus.html">预警设备状态</a></li>
+							<li><a href="historicalInformationQuery.html">历史信息查询</a></li>
+							<li><a href="showData.html">信息查看</a></li>
+							<li><a href="buildingPortrait.html">建筑画像</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-3.png">指挥调度系统</a>
+						<ul>
+							<li><a href="platformCommand.html">平台指挥</a></li>
+							<li><a href="monitoring.html">视频监控</a></li>
+							<li><a href="disposalReport.html">处置报告</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="float-l day-info">
+				<div>
+					<p>
+						<span class="m-r-5">2018.4.11</span>
+						<span class="m-r-5">星期三</span>
+						<span> 9:14:56</span>
+					</p>
+					<p class="m-t-5">
+						<span class="p-r-5 border-right"><img class="icon-img" src="../img/icon-weather.png">15℃</span>
+						<span class="p-r-5 p-l-5 border-right"><img class="icon-img" src="../img/icon-humidity.png">37%</span>
+						<span class="p-l-5">东北风三级</span>
+					</p>
+				</div>
+			</div>
+			<div class="float-l">
+				<div class="float-l">
+					<img class="login-button" src="../img/login-button.png">
+				</div>
+				<div class="float-l">
+					<img class="set-button" src="../img/seting.png">
+				</div>
+			</div>
+		</div>
+		<div class="second-bg"></div>
+	</div>
+	<div class="body">
+		<div class="body-content"></div>
+		<div class="block-box first-box">
+			<span class="top-right"></span>
+			<span class="bottom-left"></span>
+			<div class="float-r">
+				<img class="img-report" src="../img/report.png">
+			</div>
+			<div class="time-line">
+				<div class="tip tip-1">
+				<p>13:31:22</p>
+				<div class="circle"></div>
+				<p class="what">接到报警</p>
+				<p class="ditail">中式中心v19栋失火严重，起火时间为中午1点30分，起火点位于北区3-4层之间，楼内不少商家和民众没有撤离。</p>
+			</div>
+			<div class="tip tip-1">
+				<p>13:32:34</p>
+				<div class="circle line"></div>
+				<div class="small-circle"></div>
+				<p class="what">确认火灾等级为3级</p>
+				<p class="ditail">据报警人描述，确认火灾等级为3级。</p>
+			</div>
+			<div class="tip tip-1">
+				<p>13:33:56</p>
+				<div class="circle line"></div>
+				<div class="small-circle"></div>
+				<p class="what">调派警力</p>
+			</div>
+			<div class="tip tip-1">
+				<p>13:40:56</p>
+				<div class="circle line"></div>
+				<div class="small-circle"></div>
+				<p class="what">花果园微型站确认 警情为2级</p>
+				<p class="ditail">调派联动力量，工人医院进行人员抢救。附近水源为花果园35号</p>
+			</div>
+			<div class="tip tip-1">
+				<p>13:45:25</p>
+				<div class="circle line"></div>
+				<div class="small-circle"></div>
+				<p class="what">到场警情处理</p>
+				<p class="ditail">燃烧猛烈，爆炸速度快，处理难度较大，通过无人机视频查看活在燃烧情况，根据警情确定消防车停车位置，水枪水牌的位置，确定消防人员进</p>
+			</div>
+			<div class="tip tip-1">
+				<p>13:48:56</p>
+				<div class="circle line"></div>
+				<div class="small-circle"></div>
+				<p class="what">处置完毕</p>
+				<p class="ditail">确认火场安全，统计伤亡人员0人，经计损失2万元</p>
+			</div>
+			</div>
+			
+		</div>
+	</div>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/nav.js"></script>
+</body>
+</html>

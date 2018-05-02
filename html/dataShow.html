@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">	
+	<title>基础数据显示</title>
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<style type="text/css">
+		.body {
+			margin-left: calc(50% - 697px);
+		}
+		.block-box-content {
+			overflow: hidden;
+			width: 100%;
+			height: 100%;
+		}
+		.fire-rescue-statistics {
+			height: 210px;
+		}
+		.content-block {
+			padding-top: 5px;
+			margin-top: 10px;
+			margin-left: 20px;
+			float: left;
+			width: 130px;
+			height: 40px;
+			text-align: center;
+			border-radius: 4px;
+			background-color: #2A5E9A;
+			color: #ffffff;
+			font-size: 12px;
+		}
+		.years-of-fire-analysis {
+			margin-top: 10px;
+		}
+		.table-years-of-fire-analysis {
+			padding: 10px;
+			color: #ffffff;
+			font-size: 12px;
+		}
+		.table-title {
+			margin-top: 20px;
+			padding-left: 10px;
+			color: #ffffff;
+			width: calc(50% - 10px);
+			font-size: 14px;
+		}
+		.the-percentage {
+			height: 5px;
+			border-radius: 5px;
+			background-color: #51D7FF;
+		}
+		#death,#lost {
+			margin-top: 20px;
+			width: 50%;
+			height: 280px;
+		}
+		.left {
+			margin-top: 10px;
+			margin-right: 0;
+			width: 330px;
+		}
+		.center {
+			margin: 10px;
+			margin-right: 0;
+			width: 665px;
+		}
+		.right {
+			margin: 10px;
+			margin-right: 0;
+			width: 370px;
+		}
+		.map {
+			height: 550px;
+		}
+		#keyUnitStatistics {
+			height: 200px;
+		}
+		#areaPie {
+			height: 150px;
+		}
+		#peoplebar {
+			height: 150px;
+		}
+		.all-power {
+			margin-top: 10px;
+			height: 200px;
+			overflow: hidden;
+		}
+		.left-title {
+			padding: 3px 1px;
+			float: left;
+			margin-left: 20px;
+			margin-right: 20px;
+			background-color: #0C4C97;
+			color: #ffffff;
+			line-height: 1;
+			border-radius: 2px;
+		}
+		.title-line {
+			margin-top: 10px;
+			color: #ffffff;
+		}
+		.num,.unit {
+			text-align: center;
+		}
+		.sum {
+			font-size: 14px;
+		}
+		.unit {
+			font-size: 12px;
+		}
+		.right-content {
+			width: 550px;
+			overflow: hidden;
+			border: 1px solid #2CC6EA;
+			border-radius: 4px;
+		}
+		.last-box {
+			color: #ffffff;
+			height: 150px;
+			font-size: 14px;
+		}
+		.last-img {
+			height: 45px;
+		}
+		.last-box .float-l {
+			margin-top: 30px;
+			width: 50%;
+			text-align: center;
+		}
+		.img-fire {
+			height: 20px;
+		}
+		.search-box {
+			height: 37px;
+			color: #ffffff;
+		}
+		.search {
+			display: inline-block;
+			width: 280px;
+			height: 25px;
+			border: 1px solid #0097FF;
+			background-color: #0664FF;
+			border-radius: 25px;
+			text-align: center;
+		}
+		.search>input {
+			width: 70%;
+			height: 25px;
+			border: none;
+			outline: none;
+			background-color: #0664FF;
+			color: #ffffff;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="header-nav">
+		<div class="header-content">
+			<div class="float-l web-name">智慧消防大数据云平台</div>
+			<div class="float-l contain">
+				<ul class="nav-list">
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-1.png">消防大数据</a>
+						<ul>
+							<li><a href="dataShow.html">基础数据显示</a></li>
+							<li><a href="yearsFire.html">历年火灾情况</a></li>
+							<li><a href="dataAnalysis.html">消防数据分析</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-2.png">火灾预警系统</a>
+						<ul>
+							<li><a href="fireAlarmAystem.html">火情预警系统</a></li>
+							<li><a href="fireRiskThermalDiagram.html">火灾风险热力图</a></li>
+							<li><a href="earlyWarningEquipmentStatus.html">预警设备状态</a></li>
+							<li><a href="historicalInformationQuery.html">历史信息查询</a></li>
+							<li><a href="showData.html">信息查看</a></li>
+							<li><a href="buildingPortrait.html">建筑画像</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-3.png">指挥调度系统</a>
+						<ul>
+							<li><a href="platformCommand.html">平台指挥</a></li>
+							<li><a href="monitoring.html">视频监控</a></li>
+							<li><a href="disposalReport.html">处置报告</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="float-l day-info">
+				<div>
+					<p>
+						<span class="m-r-5">2018.4.11</span>
+						<span class="m-r-5">星期三</span>
+						<span> 9:14:56</span>
+					</p>
+					<p class="m-t-5">
+						<span class="p-r-5 border-right"><img class="icon-img" src="../img/icon-weather.png">15℃</span>
+						<span class="p-r-5 p-l-5 border-right"><img class="icon-img" src="../img/icon-humidity.png">37%</span>
+						<span class="p-l-5">东北风三级</span>
+					</p>
+				</div>
+			</div>
+			<div class="float-l">
+				<div class="float-l">
+					<img class="login-button" src="../img/login-button.png">
+				</div>
+				<div class="float-l">
+					<img class="set-button" src="../img/seting.png">
+				</div>
+			</div>
+		</div>
+		<div class="second-bg"></div>
+	</div>
+	<div class="body">
+		<div class="float-l left">
+			<div class="block-box fire-rescue-statistics">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<div class="block-box-content">
+					<p class="title">灭火救援统计</p>
+					<div class="content-block">
+						<p>接出警数</p>
+						<p>325</p>
+					</div>
+					<div class="content-block">
+						<p>出动消防力量（车次）</p>
+						<p>2321</p>
+					</div>
+					<div class="content-block">
+						<p>伤亡人数（人）</p>
+						<p>125</p>
+					</div>
+					<div class="content-block">
+						<p>抢救被困人员（人）</p>
+						<p>4350</p>
+					</div>
+					<div class="content-block">
+						<p>疏散人数（人）</p>
+						<p>20000</p>
+					</div>
+					<div class="content-block">
+						<p>挽救财产（万元）</p>
+						<p>14500</p>
+					</div>
+				</div>
+			</div>
+			<div class="block-box years-of-fire-analysis">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<div class="block-box-content">
+					<p class="title">历年火灾分析</p>
+					<div class="float-l table-title">
+						火灾原因分析
+					</div>
+					<div class="float-l table-title">
+						火灾场所分布
+					</div>
+					<table class="table-years-of-fire-analysis">
+						<thead>
+							<tr>
+								<td width="15%"></td>
+								<td width="35%"></td>
+								<td width="15%"></td>
+								<td width="35%"></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<div class="the-percentage" style="width: 70%;"></div>
+								</td>
+								<td>电器35%</td>
+								<td>
+									<div class="the-percentage" style="width: 60%;"></div>
+								</td>
+								<td>物资仓储场所30%</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="the-percentage" style="width: 40%;"></div>
+								</td>
+								<td>吸烟20%</td>
+								<td>
+									<div class="the-percentage" style="width: 50%;"></div>
+								</td>
+								<td>公共娱乐场所25%</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="the-percentage" style="width: 30%;"></div>
+								</td>
+								<td>放火15%</td>
+								<td>
+									<div class="the-percentage" style="width: 14%;"></div>
+								</td>
+								<td>文化场所7%</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="the-percentage" style="width: 20%;"></div>
+								</td>
+								<td>生产作业10%</td>
+								<td>
+									<div class="the-percentage" style="width: 30%;"></div>
+								</td>
+								<td>垃圾废弃物15%</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="the-percentage" style="width: 16%;"></div>
+								</td>
+								<td>生活用火不慎8%</td>
+								<td>
+									<div class="the-percentage" style="width: 20%;"></div>
+								</td>
+								<td>生产工地10%</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="the-percentage" style="width: 24%;"></div>
+								</td>
+								<td>其他12%</td>
+								<td>
+									<div class="the-percentage" style="width: 26%;"></div>
+								</td>
+								<td>其他13%</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="float-l" id="death">饼图</div>
+					<div class="float-l" id="lost">饼图</div>
+				</div>
+			</div>
+		</div>
+		<div class="float-l center">
+			<div class="block-box map">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+			</div>
+			<div class="block-box all-power">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<p class="title">全市消防力量</p>
+				<div class="title-line m-t-20">
+					<div class="left-title">
+						<p>消部</p>
+						<p>防队</p>
+					</div>
+					<div class="right-content">
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">1</p>
+							<p class="unit">支队</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">1</p>
+							<p class="unit">大队</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">1</p>
+							<p class="unit">执勤中队</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">1</p>
+							<p class="unit">消防警力总数</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">1</p>
+							<p class="unit">现役</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">1</p>
+							<p class="unit">非现役</p>
+						</div>
+					</div>
+				</div>
+				<div class="title-line">
+					<div class="left-title">
+						<p>消单</p>
+						<p>防位</p>
+					</div>
+					<div class="right-content width">
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">20</p>
+							<p class="unit">重点单位</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">35</p>
+							<p class="unit">派出所重点监管</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">12</p>
+							<p class="unit">木质结构连片区</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">246</p>
+							<p class="unit">劳动密集型企业</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">14</p>
+							<p class="unit">工业园区</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">463</p>
+							<p class="unit">高层建筑</p>
+						</div>
+					</div>
+				</div>
+				<div class="title-line">
+					<div class="left-title">
+						<p>人装</p>
+						<p>员备</p>
+					</div>
+					<div class="right-content">
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">5</p>
+							<p class="unit">政府专职消防队</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">500</p>
+							<p class="unit">队员</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">35</p>
+							<p class="unit">行政车辆</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">20</p>
+							<p class="unit">执勤消防车</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">2133</p>
+							<p class="unit">防护装备</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">2012</p>
+							<p class="unit">抢险救援器材</p>
+						</div>
+						<div class="float-l p-r-10 p-l-10">
+							<p class="num">3456</p>
+							<p class="unit">灭火类器材</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="float-l right">
+			<div class="search-box">
+				<img src="../img/fire.png" class="img-fire">
+				<span>近期火情</span>
+				<div class="search">
+					<input type="input" value="某单位火情（近期）">
+				</div>
+			</div>
+			<div class="block-box">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<p class="title">重点单位统计</p>
+				<div id="keyUnitStatistics"></div>
+			</div>
+			<div class="block-box m-t-10">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<p class="title">区域分析</p>
+				<div id="areaPie"></div>
+				<div id="peoplebar"></div>
+			</div>
+			<div class="block-box m-t-10 last-box">
+			<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<p class="title">今日采集情况</p>
+				<div class="float-l">
+					<img class="last-img" src="../img/img-chart.png">
+					<p>物联设备 3599</p>
+				</div>
+				<div class="float-l">
+					<img class="last-img" src="../img/img-fixed.png">
+					<p>消防主机  500</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/echarts.common.min.js"></script>
+	<script type="text/javascript" src="../js/deathAndLost.js"></script>
+	<script type="text/javascript" src="../js/nav.js"></script>
+	<script type="text/javascript">
+		var myChart = echarts.init(document.getElementById('keyUnitStatistics'));
+		var option = {
+		    legend: {
+		        x : 'center',
+		        y : 'bottom',
+		        textStyle: {
+		        	color: '#ffffff',
+		        	fontSize: '8px'
+		        },
+		    },
+		    calculable : true,
+		    series : [
+		        {
+		            name:'面积模式',
+		            type:'pie',
+		            radius : [30, 80],
+		            center : ['50%', '50%'],
+		            roseType : 'area',
+		            data:[
+		                {
+		                	value:10,
+		                	name:'二级重点单位',
+		                	label: {
+		                		color: '#ffffff'
+		                	},
+		                    itemStyle:{
+		                        color: '#4FC4F6'
+		                    }
+		                },
+		                {
+		                	value:5,
+		                	name:'一级重点单位',
+		                	label: {
+		                		color: '#ffffff'
+		                	},
+		                    itemStyle:{
+		                        color: '#FF503F'
+		                    }
+		                },
+		                {
+		                	value:15,
+		                	name:'三级重点单位',
+		                	label: {
+		                		color: '#ffffff'
+		                	},
+		                    itemStyle:{
+		                        color: '#F7CB4A'
+		                    }
+		                }
+		            ]
+		        }
+		    ]
+		};
+		myChart.setOption(option);
+		var myChart = echarts.init(document.getElementById('areaPie'));
+		option = {
+		    series : [
+		        {
+		            type: 'pie',
+		            radius : '55%',
+		            center: ['50%', '60%'],
+		            data:[
+		                {
+		                	value:85,
+		                	name:'受控区',
+		                	label: {
+		                		color: '#ffffff'
+		                	},
+		                    itemStyle:{
+		                        color: '#4FC4F6'
+		                    }
+		                },
+		                {
+		                	value:15,
+		                	name:'失控区',
+		                	label: {
+		                		color: '#ffffff'
+		                	},
+		                    itemStyle:{
+		                        color: '#F7CB4A'
+		                    }
+		                }
+		            ],
+		            itemStyle: {
+		                emphasis: {
+		                    shadowBlur: 10,
+		                    shadowOffsetX: 0,
+		                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+		                }
+		            }
+		        }
+		    ]
+		};
+		myChart.setOption(option);
+		var myChart = echarts.init(document.getElementById('peoplebar'));
+		option = {
+			grid: {
+		        left: '10px',
+		        right: '10px',
+		        bottom: '10px',
+		        top: '10px',
+		        containLabel: true
+		    },
+		    xAxis: {
+		        type: 'category',
+		        axisLine: {
+		        	lineStyle: {
+		        		color: '#ffffff'
+		        	}
+		        },
+		        data: ['正常', '孤寡老人', '儿童', '残障']
+		    },
+		    yAxis: {
+		        type: 'value',
+		        splitLine: {
+		        	show: false
+		        },
+		        axisLine: {
+		        	lineStyle: {
+		        		color: '#ffffff'
+		        	}
+		        }
+		    },
+		    series: [{
+		        data: [{
+		        	value: 150,
+		        	label: {
+		        		color: '#ffffff'
+		        	},itemStyle:{
+                        color: '#8DFAFE'
+                    }
+		        },{
+		        	value: 90,
+		        	label: {
+		        		color: '#ffffff'
+		        	},itemStyle:{
+                        color: '#309EF5'
+                    }
+		        },{
+		        	value: 30,
+		        	label: {
+		        		color: '#ffffff'
+		        	},itemStyle:{
+                        color: '#31C5F9'
+                    }
+		        },{
+		        	value: 10,
+		        	label: {
+		        		color: '#ffffff'
+		        	},itemStyle:{
+                        color: '#17E3FB'
+                    }
+		        }],
+		        type: 'bar',
+		        
+		        //配置样式
+		        itemStyle: {   
+		            //通常情况下：
+		            normal:{  
+		　　　　　　　　　　　　//每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
+		                color: function (params){
+		                    var colorList = ['rgb(164,205,238)','rgb(42,170,227)','rgb(25,46,94)','rgb(195,229,235)'];
+		                    return colorList[params.dataIndex];
+		                }
+		            },
+		            //鼠标悬停时：
+		            emphasis: {
+		                    shadowBlur: 10,
+		                    shadowOffsetX: 0,
+		                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+		            }
+		        },
+		        //设置柱子的宽度
+		        // barWidth : 120,
+		    }]
+		};
+		myChart.setOption(option);
+		
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">	
+	<title>建筑画像</title>
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<style type="text/css">
+		.body {
+			margin-left: calc(50% - 697px);
+		}
+		.block-box-content {
+			overflow: hidden;
+			width: 100%;
+			height: 100%;
+		}
+		.left {
+			margin: 10px;
+			margin-right: 0;
+			width: 785px;
+		}
+		.center {
+			margin-top: 10px;
+			margin-right: 0;
+			width: 593px;
+		}
+		.right {
+			margin-left: 10px;
+			/*margin-right: 0;*/
+			width: 387px;
+		}
+		.smooke-box,.electrical-box,.manual-box,.gas-box {
+			text-align: center;
+		}
+		.smooke-box>img {
+			margin-top: 10px;
+			width: 28px;
+		}
+		.electrical-box>img,.manual-box>img {
+			margin-top: 10px;
+			width: 30px;
+		}
+		.gas-box>img {
+			margin-top: 20px;
+			width: 30px;
+		}
+		.smooke-box>p,.electrical-box>p,.manual-box>p,.gas-box>p {
+			color: #3EF3D1;
+		}
+		.text-box {
+			text-align: left;
+			padding-left: 6px;
+			font-size: 10px;
+			color: #ffffff;
+		}
+		.text-box>p {
+			margin-top: 3px;
+		}
+		.tip-box {
+			margin: 10px 5px;
+			padding-left: 10px;
+			border: 1px solid #01FBFE;
+			height: 103px;
+		}
+		.num:before,.addr:before,.time:before,.what:before,.concentration:before {
+			width: 10px;
+			height: 10px;
+			top: 0;
+			left: 0;
+			content: '';
+			background: url(../img/block-box-top-left.png) no-repeat 100% 100% /10px 10px;
+			display: inline-block;
+		}
+		.num:before {
+			content: ''
+		}
+		.addr:before {
+			content: ''
+		}
+		.time:before {
+			content: ''
+		}
+		.what:before {
+			content: ''
+		}
+		.concentration:before {
+			content: ''
+		}
+		.button {
+			margin-top: 10px;
+			margin-left: 5px;
+			width: 40px;
+			text-align: center;
+			background-color: #02959B;
+			font-size: 10px;
+			color: #255B7A;
+		}
+		.button.active {
+			margin-top: 30px;
+			color: #ffffff;
+		}
+		.tip-box>.float-r {
+			margin-right: 5px;
+		}
+		.title-second {
+		    width: 150px;
+		    height: 24px;
+		    line-height: 24px;
+		    background: url(../img/title-second.png) no-repeat 100% 100% /150px 24px;
+		    text-align: center;
+		}
+	</style>
+	<style type="text/css">
+		#map {
+			height: 465px;
+			border: 1px solid #3c6ea7;
+			border-radius: 4px;
+			text-align: center;
+			background-color: #044076;
+		}
+		#map>img {
+			margin-top: 20px;
+			width: 90%;
+		}
+		.building-title {
+			margin-top: 5px;
+			color: #5BFEFD;
+			font-size: 14px;
+		}
+		.warning {
+			width: 100%;
+			padding: 10px;
+			font-size: 12px;
+		}
+		.warning tr>td {
+			padding: 5px;
+		}
+		.warning tr>td:nth-of-type(1) {
+			padding-left: 30px;
+			color: #98FBFF;
+		}
+		.warning tr>td:nth-of-type(2) {
+			padding-left: 10px;
+			color: #ffffff;
+		}
+		.warning tr>td:nth-of-type(3) {
+			padding-left: 30px;
+			color: #98FBFF;
+		}
+		.warning tr>td:nth-of-type(4) {
+			color: #ffffff;
+		}
+		.center>.block-box {
+			float: left;
+			width: 100%;
+			margin-top: 10px;
+			height: 180px;
+			overflow: hidden;
+		}
+		.article-box {
+			padding: 10px 25px;
+		}
+		.article {
+			margin-top: 15px;
+			display: inline-block;
+			padding: 8px 10px;
+			margin-left: 3px;
+			border-left: 2px solid #16D6FF;
+			background-color: #0C4C97;
+			font-size: 10px;
+			color: #FEFEFE;
+		}
+		.article>span {
+			display: inline-block;
+			color: #5BFEFD;
+		}
+		.width80 {
+			min-width: 80px;
+		}
+		.width135 {
+			width: 135px;
+		}
+		.fire-rescue-statistics {
+			float: left;
+			width: 380px;
+			overflow: hidden;
+			/*height: 250px;*/
+		}
+		.fire-hydrant,.fire-extinguisher {
+			margin-top: 15px;
+			padding: 0 60px;
+			font-size: 16px;
+			color: #ffffff;
+			vertical-align: middle;
+		}
+		.fire-hydrant:before {
+			position: relative;
+			top: 9px;
+			left: -15px;
+			content: '';
+			background: url(../img/fire-hydrant.png) no-repeat 100% 100% /35px 35px;
+			display: inline-block;
+			width: 35px;
+			height: 35px;
+		}
+		.fire-extinguisher:before {
+			position: relative;
+			top: 9px;
+			left: -15px;
+			content: '';
+			background: url(../img/fire-extinguisher.png) no-repeat 100% 100% /35px 35px;
+			display: inline-block;
+			width: 35px;
+			height: 35px;
+		}
+		.years-of-fire-analysis {
+			margin-top: 5px;
+			height: 160px;
+			float: left;
+    		width: 380px;
+		}
+		.equipment-box {
+			overflow: hidden;
+		}
+		.radio-box {
+			padding: 10px;
+		}
+		.radio {
+			margin-left: 40px;
+			display: inline-block;
+			width: 50px;
+			height: 15px;
+			border-radius: 15px;
+			border: 1px solid #0478FF;
+			vertical-align: middle;
+			font-size: 12px;
+			color: #ffffff;
+			cursor: pointer;
+		}
+		.radio>div {
+			margin-left: 5px;
+			display: inline-block;
+			width: 10px;
+			height: 10px;
+			border-radius: 10px;
+			border: 1px solid #0478FF;
+		}
+		.radio.active {
+			background-color: #0478FF;
+		}
+		.radio.active>div {
+			background-color: #11C9E2;
+		}
+		.radio.active>div:before {
+			position: absolute;
+		    content: '.';
+		    color: #ffffff;
+		    font-size: 40px;
+		    top: 9px;
+		}
+		.capsule {
+		    margin: 2px 10px;
+		    width: 40px;
+		    height: 16px;
+		    display: inline-block;
+		    background-color: #1b597e;
+		    border-radius: 9px;
+		    font-size: 10px;
+		    color: #02959B;
+		    text-align: center;
+		}
+		.equipment {
+			margin: 5px;
+			float: left;
+			width: 175px;
+			color: #ffffff;
+			font-size: 10px;
+			border: 1px solid #06BCCC;
+		}
+		.equipment td {
+			padding: 3px 0;
+		}
+		.equipment table {
+			width: 100%;
+			padding-top: 5px;
+			border-top: 1px solid #06BCCC;
+		}
+		.equipment img {
+			width: 14px;
+		}
+		.power {
+			width: 10px;
+			height: 10px;
+			border-radius: 10px;
+			background-color: #11C9E2;
+		}
+		.power.warn {
+			background-color: #CCE198;
+		}
+		.power:before {
+			position: relative;
+		    content: '.';
+		    color: #ffffff;
+		    font-size: 30px;
+		    top: -25px;
+		    left: 1px;
+		}
+		.people {
+			margin-top: 5px;
+		    float: left;
+		    width: 782px;
+		}
+		.block {
+			font-size: 12px;
+			color: #ffffff;
+			overflow: hidden;
+			padding: 20px 60px;
+		}
+		.block>div {
+			text-align: center;
+			background-color: #0C4C97;
+		}
+		.position-left {
+			padding-top: 20px;
+			width: 95px;
+			height: 50px;
+		}
+		.font18 {
+			font-size: 18px;
+			color: #5BFEFD;
+		}
+		.position-right-left,.position-right-right {
+			width: 140px;
+			height: 28px;
+			line-height: 28px;
+			margin-left: 20px
+		}
+		.position-right-right {
+			margin-left: 10px
+		}
+		.position-right-left>span {
+			color: #4dd9e3
+		}
+		.position-right-right>span {
+			color: #ef4f45
+		}
+		.position-bottom {
+			width: 290px;
+			height: 28px;
+			line-height: 28px;
+			margin-left: 20px;
+			margin-top: 12px;
+		}
+	</style>
+</head>
+<body>
+	<div class="header-nav">
+		<div class="header-content">
+			<div class="float-l web-name">智慧消防大数据云平台</div>
+			<div class="float-l contain">
+				<ul class="nav-list">
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-1.png">消防大数据</a>
+						<ul>
+							<li><a href="dataShow.html">基础数据显示</a></li>
+							<li><a href="yearsFire.html">历年火灾情况</a></li>
+							<li><a href="dataAnalysis.html">消防数据分析</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-2.png">火灾预警系统</a>
+						<ul>
+							<li><a href="fireAlarmAystem.html">火情预警系统</a></li>
+							<li><a href="fireRiskThermalDiagram.html">火灾风险热力图</a></li>
+							<li><a href="earlyWarning>tr>td:nth-child-of(1)EquipmentStatus.html">预警设备状态</a></li>
+							<li><a href="historicalInformationQuery.html">历史信息查询</a></li>
+							<li><a href="showData.html">信息查看</a></li>
+							<li><a href="buildingPortrait.html">建筑画像</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-3.png">指挥调度系统</a>
+						<ul>
+							<li><a href="platformCommand.html">平台指挥</a></li>
+							<li><a href="monitoring.html">视频监控</a></li>
+							<li><a href="disposalReport.html">处置报告</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="float-l day-info">
+				<div>
+					<p>
+						<span class="m-r-5">2018.4.11</span>
+						<span class="m-r-5">星期三</span>
+						<span> 9:14:56</span>
+					</p>
+					<p class="m-t-5">
+						<span class="p-r-5 border-right"><img class="icon-img" src="../img/icon-weather.png">15℃</span>
+						<span class="p-r-5 p-l-5 border-right"><img class="icon-img" src="../img/icon-humidity.png">37%</span>
+						<span class="p-l-5">东北风三级</span>
+					</p>
+				</div>
+			</div>
+			<div class="float-l">
+				<div class="float-l">
+					<img class="login-button" src="../img/login-button.png">
+				</div>
+				<div class="float-l">
+					<img class="set-button" src="../img/seting.png">
+				</div>
+			</div>
+		</div>
+		<div class="second-bg"></div>
+	</div>
+	<div class="body">
+		<div class="float-l center">
+			<div id="map">
+				<img src="../img/building.png">
+				<p class="building-title">金泽国际酒店平面图</p>
+			</div>
+			<div class="block-box">
+				<p class="title-second">建筑基本信息</p>
+				<table class="warning">
+					<thead>
+						<tr>
+							<td width="25%"></td>
+							<td width="25%"></td>
+							<td width="25%"></td>
+							<td width="25%"></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>建筑类别</td>
+							<td>高层 超高层</td>
+							<td>装修状况</td>
+							<td>精装修</td>
+						</tr>
+						<tr>
+							<td>总户数</td>
+							<td>4000</td>
+							<td>当期户数</td>
+							<td>50000</td>
+						</tr>
+						<tr>
+							<td>占地面积</td>
+							<td>183000000平方米</td>
+							<td>建筑面积</td>
+							<td>56870000平方米</td>
+						</tr>
+						<tr>
+							<td>物业公司</td>
+							<td>金泽国际物业</td>
+							<td>开发商</td>
+							<td>成业集团有限公司</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="float-l left">
+			<div class="block-box fire-rescue-statistics">
+				<div class="block-box-content">
+					<p class="title">联系人信息</p>
+					<div class="article-box">
+						<div>
+							<div class="article">姓名：安宇星</div>
+							<div class="article">电话：<span class="width80">15630169257</span></div>
+						</div>
+						<div>
+							<div class="article">姓名：罗玉成</div>
+							<div class="article">电话：<span class="width80">19863547893</span></div>
+						</div>
+						<div>
+							<div class="article">姓名：罗玉成</div>
+							<div class="article">电话：<span class="width80">19863547893</span></div>
+						</div>
+						<div>
+							<div class="article">姓名：安宇星</div>
+							<div class="article">电话：<span class="width80">15630169257</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+
+
+			<div class="float-r right">
+			<div class="block-box equipment-box">
+				<p class="title">设备状态</p>
+				<div class="radio-box">
+					<div class="radio active">
+						<div></div>
+						<span>在线</span>
+					</div>
+					<div class="radio">
+						<div></div>
+						<span>离线</span>
+					</div>
+					<div class="radio">
+						<div></div>
+						<span>故障</span>
+					</div>
+				</div>
+				<div>
+					<div class="equipment">
+						<div>
+							<span>设备一</span>
+							<div class="capsule float-r">修改</div>
+						</div>
+						<div>
+							<table>
+								<tr>
+									<td rowspan="3">
+										<img src="../img/equipment.png">
+									</td>
+									<td>编码：</td>
+									<td>789665456665544</td>
+								</tr>
+								<tr>
+									<td>电量：</td>
+									<td><div class="power"></div></td>
+								</tr>
+								<tr>
+									<td>状态：</td>
+									<td>在线</td>
+								</tr>
+								<tr>
+									<td colspan="3">楼层/房间号：1层</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="equipment">
+						<div>
+							<span>设备一</span>
+							<div class="capsule float-r">修改</div>
+						</div>
+						<div>
+							<table>
+								<tr>
+									<td rowspan="3">
+										<img src="../img/equipment.png">
+									</td>
+									<td>编码：</td>
+									<td>789665456665544</td>
+								</tr>
+								<tr>
+									<td>电量：</td>
+									<td><div class="power"></div></td>
+								</tr>
+								<tr>
+									<td>状态：</td>
+									<td>在线</td>
+								</tr>
+								<tr>
+									<td colspan="3">楼层/房间号：1层</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="equipment">
+						<div>
+							<span>设备一</span>
+							<div class="capsule float-r">修改</div>
+						</div>
+						<div>
+							<table>
+								<tr>
+									<td rowspan="3">
+										<img src="../img/equipment.png">
+									</td>
+									<td>编码：</td>
+									<td>789665456665544</td>
+								</tr>
+								<tr>
+									<td>电量：</td>
+									<td><div class="power"></div></td>
+								</tr>
+								<tr>
+									<td>状态：</td>
+									<td>在线</td>
+								</tr>
+								<tr>
+									<td colspan="3">楼层/房间号：1层</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="equipment">
+						<div>
+							<span>设备一</span>
+							<div class="capsule float-r">修改</div>
+						</div>
+						<div>
+							<table>
+								<tr>
+									<td rowspan="3">
+										<img src="../img/equipment.png">
+									</td>
+									<td>编码：</td>
+									<td>789665456665544</td>
+								</tr>
+								<tr>
+									<td>电量：</td>
+									<td><div class="power"></div></td>
+								</tr>
+								<tr>
+									<td>状态：</td>
+									<td>在线</td>
+								</tr>
+								<tr>
+									<td colspan="3">楼层/房间号：1层</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div>
+					<p class="title-third">设备报警次数</p>
+					<div class="article-box">
+						<div>
+							<div class="article width135 m-t-0">无线烟雾智能感知器：<span>36</span></div>
+							<div class="article width135 m-t-0">智能红外动态探测器：<span>16</span></div>
+						</div>
+						<div>
+							<div class="article width135">智能声光报警：<span>3</span></div>
+							<div class="article width135">智能燃气探测报警器：<span>40</span></div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<p class="title-third">设备使用率</p>
+					<div class="article-box">
+						<div>
+							<div class="article m-t-0">无线烟雾智能感知器：<span>100%</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+<div class="block-box years-of-fire-analysis">
+				<div class="block-box-content">
+					<p class="title">消防设施</p>
+					<p class="fire-hydrant">消防栓：15个</p>
+					<p class="fire-extinguisher">灭火器：30个</p>
+				</div>
+			</div>
+
+
+
+<div class="block-box people">
+				<div class="block-box-content">
+					<p class="title">人员信息</p>
+					<div class="block">
+						<div class="float-l position-left">
+							<p>全部培训人员</p>
+							<p class="font18">100%</p>
+						</div>
+						<div class="float-l position-right-left">
+							基本消防培训 <span>30</span> 次
+						</div>
+						<div class="float-l position-right-right">
+							消防演习 <span>15</span> 次
+						</div>
+						<div class="float-l position-bottom">消防培训：2018年4月12日消防演习</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="block-box people">
+				<div class="block-box-content">
+					<p class="title">重点危爆信息</p>
+					<div class="block">
+						<div class="float-l position-right-left">
+							附近加油站： <span>1</span> 个
+						</div>
+						<div class="float-l position-right-right">
+							附近燃气站： <span>2</span> 个
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		
+		
+	</div>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/nav.js"></script>
+</body>
+</html>
