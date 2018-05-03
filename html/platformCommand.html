@@ -3,19 +3,879 @@
 <head>
 	<meta charset="utf-8">	
 	<title>平台指挥</title>
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
 	<style type="text/css">
-		* {
-			margin: 0;
-			padding: 0;
+		.body {
+			margin-left: calc(50% - 697px);
 		}
-		body {
-			background: #252e50;
+		.block-box-content {
+			overflow: hidden;
+			width: 100%;
+			height: 100%;
+		}
+		.fire-rescue-statistics {
+			height: 210px;
+		}
+		.years-of-fire-analysis {
+			margin-top: 10px;
+		}
+		
+		
+		.smooke-box,.electrical-box,.manual-box,.gas-box {
+			text-align: center;
+		}
+		.smooke-box>img {
+			margin-top: 10px;
+			width: 28px;
+		}
+		.electrical-box>img,.manual-box>img {
+			margin-top: 10px;
+			width: 30px;
+		}
+		.gas-box>img {
+			margin-top: 20px;
+			width: 30px;
+		}
+		.smooke-box>p,.electrical-box>p,.manual-box>p,.gas-box>p {
+			color: #3EF3D1;
+		}
+		.text-box {
+			text-align: left;
+			padding-left: 6px;
+			font-size: 10px;
+			color: #ffffff;
+		}
+		.text-box>p {
+			margin-top: 3px;
+		}
+		
+		
+		.num:before,.addr:before,.time:before,.what:before,.concentration:before {
+			width: 10px;
+			height: 10px;
+			top: 0;
+			left: 0;
+			content: '';
+			background: url(../img/block-box-top-left.png) no-repeat 100% 100% /10px 10px;
+			display: inline-block;
+		}
+		.num:before {
+			background: url(../img/color-page.png) no-repeat 100% 100% /10px 10px;
+		}
+		.addr:before {
+			background: url(../img/color-location.png) no-repeat 100% 100% /10px 10px;
+		}
+		.time:before {
+			background: url(../img/color-clock.png) no-repeat 100% 100% /10px 10px;
+		}
+		.what:before {
+			background: url(../img/color-certificate.png) no-repeat 100% 100% /10px 10px;
+		}
+		.concentration:before {
+			background: url(../img/color-bar.png) no-repeat 100% 100% /10px 10px;
+		}
+		.tip-box>.float-r {
+			margin-right: 5px;
+		}
+		#map {
+			height: 550px;
+			border: 1px solid #3c6ea7;
+			border-radius: 4px;
+		}
+		
+		.all-power {
+			margin-left: 8px;
+		}
+		.title-second {
+		    width: 150px;
+		    height: 24px;
+		    line-height: 24px;
+		    background: url(../img/title-second.png) no-repeat 100% 100% /150px 24px;
+		    text-align: center;
+		}
+		
+		
+		
+		#characteristics {
+			height: 200px;
+		}
+		
+	</style>
+	<style type="text/css">
+	.tip-box>span {
+		    position: absolute;
+		    content: '';
+		    display: inline-block;
+		    width: 10px;
+		    height: 10px;
+		}
+		.tip-box>span.top-left {
+		    top: -3px;
+		    margin-left: -191px;
+		    background: url(../img/top-left.png) no-repeat 100% 100% /10px 10px;
+		}
+		.tip-box>span.top-right {
+		    top: -3px;
+		    left: 100%;
+		    margin-left: -7px;
+		    background: url(../img/top-right.png) no-repeat 100% 100% /10px 10px;
+		}
+		.tip-box>span.bottom-left {
+		    top: 100%;
+		    margin-left: -1px;
+    		margin-top: -6px;
+		    background: url(../img/bottom-left.png) no-repeat 100% 100% /10px 10px;
+		}
+		.tip-box>span.bottom-right {
+		    top: 100%;
+		    left: 100%;
+		    margin-top: -7px;
+		    margin-left: -7px;
+		    background: url(../img/bottom-right.png) no-repeat 100% 100% /10px 10px;
+		}
+		.left {
+			margin-top: 10px;
+			margin-right: 0;
+			width: 380px;
+		}
+		.center {
+			margin: 10px;
+			margin-right: 0;
+			width: 615px;
+		}
+		.right {
+			margin: 10px;
+			margin-right: 0;
+			width: 380px;
+		}
+		.info-table {
+			margin-top: 20px;
+			width: 100%;
+			color: #ffffff;
+			text-align: center;
+		}
+		.info-table td {
+			padding: 2px 5px;
+		}
+		.tip-box {
+			color: #ffffff;
+			text-align: center;
+		}
+		.where {
+			margin-top: 10px;
+			color: #00FFFF;
+		}
+		.when {
+			width: 50%;
+			float: left;
+			margin-top: 10px;
+			color: #00FFFF;
+		}
+		.how {
+			width: 50%;
+			float: left;
+			margin-top: 10px;
+			color: #00FFFF;
+		}
+		.tip-box {
+			position: relative;
+			margin: 10px 5px;
+			padding-left: 10px;
+			border: 1px solid #01FBFE;
+			height: 73px;
+			background-color: #0C4C97;
+		}
+		.dynamic-table {
+			width: 90%;
+			margin: 20px auto;
+			padding-top: 10px;
+			text-align: center;
+			color: #ffffff;
+			background-color: #0C4C97;
+		}
+		.dynamic-table tbody {
+			color: #07D6DE;
+		}
+		.capsule {
+		    padding: 0 5px;
+		    height: 25px;
+		    line-height: 25px;
+		    display: inline-block;
+		    background-color: #07D6DE;
+		    border-radius: 25px;
+		    font-size: 14px;
+		    color: #252D51;
+		    text-align: center;
+		}
+		.equipment-table {
+			width: 100%;
+			text-align: center;
+		}
+		.equipment-table img {
+			height: 35px;
+		}
+		.equipment-table .capsule {
+			width: 30px;
+		}
+		.search-box {
+			height: 37px;
+			color: #ffffff;
+		}
+		.search {
+			margin-left: 40px;
+			display: inline-block;
+			width: 280px;
+			height: 25px;
+			border: 1px solid #0097FF;
+			background-color: #0664FF;
+			border-radius: 25px;
+			text-align: center;
+			overflow: hidden;
+			position: relative;
+		}
+		.search>input {
+			width: 70%;
+			height: 25px;
+			border: none;
+			outline: none;
+			background-color: #0664FF;
+			color: #ffffff;
+			text-align: center;
+		}
+		.search>img {
+			position: absolute;
+			width: 100px;
+			top: -9px;
+			right: -53px;
+		}
+		.information {
+			width: 366px;
+			margin: 10px 5px;
+			color: #ffffff;
+			font-size: 12px;
+			text-align: center;
+		}
+		.information td {
+			border-top: 1px solid #01FBFE;
+		}
+		.information td:nth-of-type(1) {
+			border-right: 1px solid #01FBFE;
+			text-align: right;
+		}
+		.information td:nth-of-type(2) {
+			text-align: left;
+		}
+		.goto-building {
+			background-color: #0087E4;
+			width: 90px;
+			height: 20px;
+			line-height: 20px;
+			border-radius: 4px;
+			color: #ffffff;
+			margin: 10px auto;
+			text-align: center;
+		}
+		.table-left,.table-right {
+			margin: 20px;
+		}
+		.table-left>div {
+			width: 65px;
+			height: 40px;
+			line-height: 40px;
+			text-align: center;
+			color: #ffffff;
+		}
+		.table-left>div.active {
+			background-color: #0C4C97;
+		}
+		.table-right {
+			margin-left: 0;
+			background-color: #0C4C97;
+			border-bottom: 1px solid #40FDD6;
+		}
+		.table-right>p {
+			padding: 5px 10px;
+			border-bottom: 1px solid #40FDD6;
+			color: #ffffff;
+		}
+		.center>.block-box {
+			float: left;
+			width: 300px;
+			margin-top: 10px;
+			height: 230px;
+		}
+		.font-style {
+			color: #3EF3D1;
+			font-size: 10px;
+			text-align: right;
+		}
+		.the-percentage {
+			display: inline-block;
+			height: 12px;
+			border-radius: 5px;
+			background-color: #51D7FF;
+		}
+		.percentage {
+			color: #5BFEFD;
+			margin-top: 5px;
+		}
+		.warning {
+			padding: 10px 5px;
+			font-size: 10px;
 		}
 	</style>
 </head>
 <body>
-	<div class="body">
-		
+	<div class="header-nav">
+		<div class="header-content">
+			<div class="float-l web-name">智慧消防大数据云平台</div>
+			<div class="float-l contain">
+				<ul class="nav-list">
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-1.png">消防大数据</a>
+						<ul>
+							<li><a href="dataShow.html">基础数据显示</a></li>
+							<li><a href="yearsFire.html">历年火灾情况</a></li>
+							<li><a href="dataAnalysis.html">消防数据分析</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-2.png">火灾预警系统</a>
+						<ul>
+							<li><a href="fireAlarmAystem.html">火情预警系统</a></li>
+							<li><a href="fireRiskThermalDiagram.html">火灾风险热力图</a></li>
+							<li><a href="earlyWarningEquipmentStatus.html">预警设备状态</a></li>
+							<li><a href="historicalInformationQuery.html">历史信息查询</a></li>
+							<li><a href="showData.html">信息查看</a></li>
+							<li><a href="buildingPortrait.html">建筑画像</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#"><img class="icon-tip" src="../img/icon-tip-3.png">指挥调度系统</a>
+						<ul>
+							<li><a href="platformCommand.html">平台指挥</a></li>
+							<li><a href="monitoring.html">视频监控</a></li>
+							<li><a href="disposalReport.html">处置报告</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="float-l day-info">
+				<div>
+					<p>
+						<span class="m-r-5">2018.4.11</span>
+						<span class="m-r-5">星期三</span>
+						<span> 9:14:56</span>
+					</p>
+					<p class="m-t-5">
+						<span class="p-r-5 border-right"><img class="icon-img" src="../img/icon-weather.png">15℃</span>
+						<span class="p-r-5 p-l-5 border-right"><img class="icon-img" src="../img/icon-humidity.png">37%</span>
+						<span class="p-l-5">东北风三级</span>
+					</p>
+				</div>
+			</div>
+			<div class="float-l">
+				<div class="float-l">
+					<img class="login-button" src="../img/login-button.png">
+				</div>
+				<div class="float-l">
+					<img class="set-button" src="../img/seting.png">
+				</div>
+			</div>
+		</div>
+		<div class="second-bg"></div>
 	</div>
+	<div class="body">
+		<div class="float-l left">
+			<div class="block-box fire-rescue-statistics">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<div class="block-box-content">
+					<p class="title">警情信息</p>
+					<table class="info-table">
+						<thead>
+							<tr>
+								<td>地址</td>
+								<td>时间</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>凤凰国际</td>
+								<td>2018/04/12  12:45:23</td>
+							</tr>
+							<tr>
+								<td>丽融大厦</td>
+								<td>2018/04/11  10:14:34</td>
+							</tr>
+							<tr>
+								<td>国贸宾馆</td>
+								<td>2018/04/11  10:14:34</td>
+							</tr>
+							<tr>
+								<td>中古楼商厦</td>
+								<td>2018/04/11  10:14:34</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="block-box years-of-fire-analysis">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<div class="block-box-content">
+					<p class="title">警情动态</p>
+					<div class="tip-box">
+						<span class="top-left"></span>
+						<span class="top-right"></span>
+						<span class="bottom-left"></span>
+						<span class="bottom-right"></span>
+						<p class="where">金泽国际酒店</p>
+						<p class="when">2018.4.12  14:20:57</p>
+						<p class="how">一般火灾  气体火灾</p>
+					</div>
+					<table class="dynamic-table">
+						<thead>
+							<tr>
+								<td>时间</td>
+								<td>派警情况</td>
+								<td>联系人</td>
+								<td>电话</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>14:24:58</td>
+								<td>派警到达</td>
+								<td>李晓明</td>
+								<td>15630169257  </td>
+							</tr>
+							<tr>
+								<td>14:24:58</td>
+								<td>派警到达</td>
+								<td>李晓明</td>
+								<td>15630169257</td>
+							</tr>
+							<tr>
+								<td>14:24:58</td>
+								<td>派警到达</td>
+								<td>李晓明</td>
+								<td>15630169257</td>
+							</tr>
+							<tr>
+								<td>14:24:58</td>
+								<td>派警到达</td>
+								<td>李晓明</td>
+								<td>15630169257</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="block-box years-of-fire-analysis">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<div class="block-box-content">
+					<p class="title">警力出动情况</p>
+					<table class="dynamic-table">
+						<thead>
+							<tr>
+								<td>编队信息</td>
+								<td>距离</td>
+								<td>预计到达</td>
+								<td>操作</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>泡沫灭火编队</td>
+								<td>3.2km</td>
+								<td>7＂</td>
+								<td>
+									<div class="capsule">到达</div>
+									<div class="capsule">完毕</div>
+									<div class="capsule">返回</div>
+								</td>
+							</tr>
+							<tr>
+								<td>抢先编队</td>
+								<td>5.6km</td>
+								<td>1＇7＂</td>
+								<td><div class="capsule">一键派警</div></td>
+							</tr>
+							<tr>
+								<td>高喷编队</td>
+								<td>9.6km</td>
+								<td>56＂</td>
+								<td>
+									<div class="capsule">到达</div>
+									<div class="capsule">完毕</div>
+									<div class="capsule">返回</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<table class="equipment-table">
+						<tbody>
+							<tr>
+								<td>
+									<div>
+										<img src="../img/img-car.png">
+									</div>
+									<div class="capsule">10</div>
+								</td>
+								<td>
+									<div>
+										<img src="../img/img-car-second.png">
+									</div>
+									<div class="capsule">8</div>
+								</td>
+								<td>
+									<div>
+										<img src="../img/img-water-fun.png">
+									</div>
+									<div class="capsule">10</div>
+								</td>
+								<td>
+									<div>
+										<img src="../img/img-car-third.png">
+									</div>
+									<div class="capsule">18</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div>
+										<img src="../img/img-fire-extinguisher.png">
+									</div>
+									<div class="capsule">7</div>
+								</td>
+								<td>
+									<div>
+										<img src="../img/img-water.png">
+									</div>
+									<div class="capsule">16</div>
+								</td>
+								<td>
+									<div>
+										<img src="../img/img-medical.png">
+									</div>
+									<div class="capsule">3</div>
+								</td>
+								<td>
+									<div>
+										<img src="../img/img-car-forth.png">
+									</div>
+									<div class="capsule">9</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="float-l center">
+			<div id="map"></div>
+			<div class="block-box">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<p class="title-second">火情蔓延趋势</p>
+				<div id="characteristics"></div>
+			</div>
+			<div class="block-box all-power">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<p class="title-second">技术支撑火灾用水计算</p>
+				<table class="warning">
+					<thead>
+						<tr>
+							<td></td>
+							<td width="190px"></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<p class="font-style">建筑火灾类型：</p>
+								
+							</td>
+							<td class="percentage"><div class="the-percentage" style="width: 20%;"></div>20</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="font-style">供水强度：</p>
+								
+							</td>
+							<td class="percentage"><div class="the-percentage" style="width: 30%;"></div>L/(s*m  )</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="font-style">燃烧面积：</p>
+								
+							</td>
+							<td class="percentage"><div class="the-percentage" style="width: 10%;"></div>m</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="font-style">水枪流量：</p>
+								
+							</td>
+							<td class="percentage"><div class="the-percentage" style="width: 21%;"></div>L/s</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="font-style">车供水强度：</p>
+								
+							</td>
+							<td class="percentage"><div class="the-percentage" style="width: 21%;"></div>L/(s*m  )</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="font-style">预估用水量：</p>
+								
+							</td>
+							<td class="percentage"><div class="the-percentage" style="width: 21%;"></div>L/S(燃烧面积*供水强度）</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="font-style">水枪数量：</p>
+								
+							</td>
+							<td class="percentage"><div class="the-percentage" style="width: 21%;"></div>个(预估用水量/水枪流量）</td>
+						</tr>
+						<tr>
+							<td>
+								<p class="font-style">车辆数量：</p>
+								
+							</td>
+							<td class="percentage"><div class="the-percentage" style="width: 21%;"></div>辆(预估用水量/车供水强度）</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+		</div>
+		<div class="float-l right">
+			<div class="search-box">
+				<div class="search">
+					<input type="input" value="搜索信息">
+					<img src="../img/search.png">
+				</div>
+			</div>
+
+			<div class="block-box">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<p class="title">建筑信息及周边</p>
+				<div class="tip-box">
+						<span class="top-left"></span>
+						<span class="top-right"></span>
+						<span class="bottom-left"></span>
+						<span class="bottom-right"></span>
+						<p class="where">金泽国际酒店</p>
+						<p class="when">2018.4.12  14:20:57</p>
+						<p class="how">一般火灾  气体火灾</p>
+					</div>
+				<table class="information">
+					<tbody>
+						<tr>
+							<td>名称：</td>
+							<td>金泽国际酒店</td>
+						</tr>
+						<tr>
+							<td>地址：</td>
+							<td>宝塔区东关街24号(近延安汽车站)</td>
+						</tr>
+						<tr>
+							<td>结构：</td>
+							<td>钢、钢筋混凝土</td>
+						</tr>
+						<tr>
+							<td>使用性质：</td>
+							<td>酒店</td>
+						</tr>
+						<tr>
+							<td>耐火等级：</td>
+							<td>二级耐火</td>
+						</tr>
+						<tr>
+							<td>建筑面积：</td>
+							<td>4000平方米</td>
+						</tr>
+						<tr>
+							<td>高度：</td>
+							<td>100米</td>
+						</tr>
+						<tr>
+							<td>学校：</td>
+							<td>艺术学院 </td>
+						</tr>
+						<tr>
+							<td>商业：</td>
+							<td>百货大楼</td>
+						</tr>
+						<tr>
+							<td>银行：</td>
+							<td>工行、农行、建行</td>
+						</tr>
+						<tr>
+							<td>医院：</td>
+							<td>市医院</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="goto-building">建筑画像</div>
+			</div>
+			<div class="block-box years-of-fire-analysis">
+				<span class="top-right"></span>
+				<span class="bottom-left"></span>
+				<div class="block-box-content">
+					<p class="title">资源列表</p>
+					<div class="float-l table-left">
+						<div class="active">消防站</div>
+						<div>消防单位</div>
+						<div>水源</div>
+						<div>消防栓</div>
+					</div>
+					<div class="float-l table-right">
+						<p>金延安购物中心</p>
+						<p>延安黄龙商城住宿部</p>
+						<p>延安东大百货</p>
+						<p>延安丽融东兴百汇超市</p>
+						<p>延安丽融东兴百汇超市延安东大百货</p>
+						<p>延安丽融东兴百汇超市</p>
+					</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/nav.js"></script>
+	<script src="http://api.map.baidu.com/api?v=2.0&ak=53oVIOgmSIejwV7EfphPgTynOZbIiVYu"></script>
+	<script type="text/javascript" src="../js/echarts.min.js"></script>
+	<script src="../js/bmap.js"></script>
+	<script type="text/javascript">
+
+		var myChart = echarts.init(document.getElementById('characteristics'));
+		var base = +new Date(1968, 9, 3);
+		var oneDay = 24 * 3600 * 1000;
+		var date = [];
+
+		var data = [Math.random() * 300];
+
+		for (var i = 1; i < 2000; i++) {
+		    var now = new Date(base += oneDay);
+		    date.push((i/60).toFixed(0));
+		    data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
+		}
+
+		option = {
+		    xAxis: {
+		        type: 'category',
+		        boundaryGap: false,
+		        data: date,
+		        axisLabel: {
+		            textStyle: {
+		                color: '#fff'
+		            }
+		        },
+		        axisLine: {
+		        	lineStyle:{
+		        		color: '#fff'
+		        	}
+		        }
+		    },
+		    yAxis: {
+		        type: 'value',
+		        boundaryGap: [0, '100%'],
+		        axisLabel: {
+		            textStyle: {
+		                color: '#fff'
+		            }
+		        },
+		        splitLine: {
+		            show: false
+		        },
+		        axisLine: {
+		        	lineStyle:{
+		        		color: '#fff'
+		        	}
+		        }
+		    },
+		    series: [
+		        {
+		            name:'模拟数据',
+		            type:'line',
+		            smooth:true,
+		            symbol: 'none',
+		            sampling: 'average',
+		            itemStyle: {
+		                normal: {
+		                    color: 'rgb(255, 70, 131)'
+		                }
+		            },
+		            areaStyle: {
+		                normal: {
+		                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+		                        offset: 0,
+		                        color: '#1BE3E7'
+		                    }, {
+		                        offset: 1,
+		                        color: '#BB6EE5'
+		                    }])
+		                }
+		            },
+		            data: data
+		        }
+		    ]
+		};
+
+		myChart.setOption(option);
+
+
+		var myChart = echarts.init(document.getElementById('map'));
+
+		myChart.setOption(option = {
+	        animation: false,
+	        bmap: {
+	        	roam: true,
+	            center: [109.4914266322374, 36.60235018034923],
+	            zoom: 14,
+	            roam: true
+	        },
+	        series: [{
+            type: 'scatter',
+            coordinateSystem: 'bmap',
+            symbol: 'path://M54.227,12.611c-0.338-0.336-0.736-0.505-1.196-0.505c-0.229,0-0.712,0.188-1.446,0.559  c-0.735,0.372-1.515,0.786-2.336,1.248c-0.823,0.459-1.797,0.875-2.921,1.247c-1.123,0.371-2.163,0.559-3.12,0.559  c-0.884,0-1.664-0.168-2.336-0.505c-2.229-1.044-4.168-1.823-5.814-2.337c-1.646-0.513-3.416-0.771-5.311-0.771  c-3.272,0-6.999,1.064-11.177,3.188c-0.862,0.43-1.48,0.763-1.88,1.007l-0.397-2.911c0.897-0.779,1.476-1.914,1.476-3.195  c0-2.347-1.902-4.249-4.249-4.249c-2.347,0-4.249,1.902-4.249,4.249c0,1.531,0.818,2.862,2.032,3.61l5.74,42.09  c0.171,1.253,1.243,2.162,2.474,2.162c0.112,0,0.226-0.007,0.341-0.022c1.368-0.188,2.326-1.447,2.139-2.815L19.69,38.303  c4.186-2.077,7.807-3.124,10.853-3.124c1.293,0,2.554,0.193,3.783,0.583c1.23,0.391,2.253,0.815,3.067,1.274  c0.814,0.46,1.775,0.886,2.88,1.274c1.107,0.39,2.2,0.585,3.279,0.585c2.726,0,5.991-1.027,9.796-3.08  c0.478-0.248,0.828-0.492,1.049-0.731c0.221-0.239,0.332-0.579,0.332-1.021V13.806C54.729,13.347,54.562,12.948,54.227,12.611z',
+            symbolSize: 30,
+            symbolOffset: [15, -15],
+            tooltip: {
+                show: false  
+            },
+            itemStyle: {
+                normal: {
+                    color: 'red',
+                    borderWidth: 1,
+                    borderColor: '#fff'
+                }
+            },
+            label: {
+                normal: {
+                    textStyle: {
+                        fontWeight: 'bold',
+                        color: '#111'
+                    },
+                    show: true,
+                    position: 'right',
+                    formatter: '{b}'
+                }
+            },
+            data: [{name: "玉皇山", value: [109.4914266322374, 36.60235018034923,-1]},
+{name: "浙大玉泉校区（起点）", value: [109.4814266322374, 36.70235018034923,-1]},
+{name: "北高峰", value: [109.4904266322374, 36.61235018034923,-1]},
+{name: "美女峰", value: [109.4934266322374, 36.59235018034923,-1]},
+{name: "石人亭", value: [109.4954266322374, 36.60935018034923,-1]}]
+        }]
+	    });
+	</script>
 </body>
 </html>

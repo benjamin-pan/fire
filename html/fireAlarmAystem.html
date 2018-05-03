@@ -620,6 +620,9 @@
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
 	<script type="text/javascript" src="../js/echarts.min.js"></script>
 	<script type="text/javascript" src="../js/nav.js"></script>
+	<script src="http://api.map.baidu.com/api?v=2.0&ak=53oVIOgmSIejwV7EfphPgTynOZbIiVYu"></script>
+	<script type="text/javascript" src="../js/echarts.min.js"></script>
+	<script src="../js/bmap.js"></script>
 	<script type="text/javascript">
 		var myChart = echarts.init(document.getElementById('trend'));
 
@@ -789,6 +792,38 @@
 		    ]
 		};
 		myChart.setOption(option);
+
+		var myChart = echarts.init(document.getElementById('map'));
+var arr=[];
+			for(var i=0;i<20000;i++){
+				arr.push([Math.pow(-1,Math.ceil(i*Math.random()))*i*Math.random()/20000+109.4914266322374,Math.pow(-1,Math.ceil(i*Math.random()))*i*Math.random()/20000+36.60235018034923,i*Math.random()])
+			}
+		myChart.setOption(option = {
+	        animation: false,
+	        bmap: {
+	            center: [109.4914266322374, 36.60235018034923],
+	            zoom: 14,
+	            roam: true
+	        },
+	        visualMap: {
+	            show: false,
+	            top: 'top',
+	            min: 0,
+	            max: 5,
+	            seriesIndex: 0,
+	            calculable: true,
+	            inRange: {
+	                color: ['blue', 'blue', 'green', 'yellow', 'red']
+	            }
+	        },
+	        series: [{
+	        	type: 'heatmap',
+		        coordinateSystem: 'bmap',
+		        data:arr,
+	            pointSize: 5,
+	            blurSize: 6
+	        }]
+	    });
 
 	</script>
 </body>

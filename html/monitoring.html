@@ -6,14 +6,18 @@
 	<link rel="stylesheet" type="text/css" href="../css/common.css">
 	<link rel="stylesheet" type="text/css" href="../css/select.css">
 	<style type="text/css">
+		body {
+			background: #252e50;
+		}
 		.body {
-			margin-left: calc(50% - 696px);
+			margin-left: calc(50% - 685px);
 		}
 		.first-box {
 			margin: 10px auto;
-			width: 1390px;
-			height: 766px;
-			text-align: center;
+			width: 1148px;
+			height: 770px;
+			float: left;
+			/*text-align: center;*/
 		}
 		.img-box {
 			width: 1150px;
@@ -22,11 +26,10 @@
 			/*float: left;*/
 			width: 570px;
 		}
-
-</style>
-<script type="text/javascript">
-
-</script>
+		.select-box {
+			margin-top: 8px;
+			width: 220px;
+		}
 	</style>
 </head>
 <body>
@@ -90,8 +93,8 @@
 		<div class="second-bg"></div>
 	</div>
 	<div class="body">
-		<div class="body-content"></div>
-		<div class="block-box first-box">
+		<div class="body-content">
+			<div class="block-box first-box">
 			<span class="top-right"></span>
 			<span class="bottom-left"></span>
 			<div class="float-l img-box">
@@ -100,7 +103,8 @@
 				<img class="m-t-5" src="../img/third-vedio.jpg">
 				<img class="m-l-5 m-t-5" src="../img/forth-vedio.jpg">
 			</div>
-			<div class="float-r">
+		</div>
+		<div class="select-box float-r">
 				<dl class="select">
 				<dt>宝塔区</dt>
 				<dd>
@@ -117,8 +121,6 @@
 					</ul>
 				</dd>
 			</dl>
-			<!-- </div> -->
-			<!-- <div> -->
 				<dl class="select">
 				<dt>新华区</dt>
 				<dd>
@@ -135,8 +137,6 @@
 					</ul>
 				</dd>
 			</dl>
-			<!-- </div> -->
-			<!-- <div> -->
 				<dl class="select">
 				<dt>裕华区</dt>
 				<dd>
@@ -153,8 +153,6 @@
 					</ul>
 				</dd>
 			</dl>
-			<!-- </div> -->
-			<!-- <div> -->
 				<dl class="select">
 				<dt>长安区</dt>
 				<dd>
@@ -171,8 +169,6 @@
 					</ul>
 				</dd>
 			</dl>
-			<!-- </div> -->
-			<!-- <div> -->
 				<dl class="select">
 				<dt>开发区</dt>
 				<dd>
@@ -189,8 +185,6 @@
 					</ul>
 				</dd>
 			</dl>
-			<!-- </div> -->
-			<!-- <div> -->
 				<dl class="select">
 				<dt>桥西区</dt>
 				<dd>
@@ -207,8 +201,6 @@
 					</ul>
 				</dd>
 			</dl>
-			<!-- </div> -->
-			<!-- <div> -->
 				<dl class="select">
 				<dt>桥东区</dt>
 				<dd>
@@ -225,8 +217,6 @@
 					</ul>
 				</dd>
 			</dl>
-			<!-- </div> -->
-			<!-- <div> -->
 				<dl class="select">
 				<dt>鹿泉区</dt>
 				<dd>
@@ -243,8 +233,6 @@
 					</ul>
 				</dd>
 			</dl>
-			<!-- </div> -->
-			<!-- <div> -->
 				<dl class="select">
 				<dt>栾城区</dt>
 				<dd>
@@ -262,8 +250,12 @@
 				</dd>
 			</dl>
 		</div>
+			
+	</div>
+	
 	</div>
 	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/nav.js"></script>
 	<script type="text/javascript" src="../js/select.js"></script>
 </body>
 </html>

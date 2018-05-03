@@ -172,12 +172,6 @@
 			var myChart = echarts.init(document.getElementById('peoplebar'));
 			option = {
 				legend: {
-			        // x : 'left',
-			        // y : 'bottom',
-			        // textStyle: {
-			        // 	color: '#ffffff',
-			        // 	fontSize: '8px'
-			        // },
 			        data: ['正常', '孤寡老人', '儿童', '残障']
 			    },
 			    xAxis: {
@@ -260,13 +254,9 @@
 			        data: ['一级重点单位', '二级重点单位', '三级重点单位']
 			    },
 			    radar: {
-			        // shape: 'circle',
 			        name: {
 			            textStyle: {
-			                color: '#fff',
-			                // backgroundColor: '#999',
-			                // borderRadius: 3,
-			                // padding: [3, 5]
+			                color: '#fff'
 			          }
 			        },
 			        indicator: [
@@ -406,6 +396,9 @@
 			        }
 			    },
 			    legend: {
+			    	textStyle: {
+			    		color: '#ffffff'
+			    	},
 			        data: ['机关单位', '学校', '商业大厦', '写字楼', '九小场所', '三合一场所']
 			    },
 			    grid: {
