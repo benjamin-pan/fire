@@ -143,16 +143,27 @@
 			background-color: #0664FF;
 			border-radius: 25px;
 			text-align: center;
+			overflow: hidden;
+			position: relative;
 		}
-		.search>input {
-			width: 70%;
+		.search>div.move {
+		    position: absolute;
+            -webkit-animation: anim 10s linear infinite;
+            width: 100%;
+		}
+		.search>div>div {
+			cursor: pointer;
 			height: 25px;
-			border: none;
-			outline: none;
+			line-height: 25px;
 			background-color: #0664FF;
 			color: #ffffff;
 			text-align: center;
 		}
+      
+      @-webkit-keyframes anim{
+        0% {top: 0px;}
+        100%{top: -75px;}
+      }
 	</style>
 </head>
 <body>
@@ -452,7 +463,12 @@
 				<img src="../img/fire.png" class="img-fire">
 				<span>近期火情</span>
 				<div class="search">
-					<input type="input" value="某单位火情（近期）">
+					<div class="move">
+						<div>某单位火情（近期）</div>
+						<div>某单位火情（近期）</div>
+						<div>某单位火情（近期）</div>
+						<div>某单位火情（近期）</div>
+					</div>
 				</div>
 			</div>
 			<div class="block-box">
@@ -472,14 +488,14 @@
 			<span class="top-right"></span>
 				<span class="bottom-left"></span>
 				<p class="title">今日采集情况</p>
-				<div class="float-l">
+				<a class="float-l" href="earlyWarningEquipmentStatus.html">
 					<img class="last-img" src="../img/img-chart.png">
 					<p>物联设备 3599</p>
-				</div>
-				<div class="float-l">
+				</a>
+				<a class="float-l" href="earlyWarningEquipmentStatus.html">
 					<img class="last-img" src="../img/img-fixed.png">
 					<p>消防主机  500</p>
-				</div>
+				</a>
 			</div>
 		</div>
 	</div>
@@ -617,6 +633,8 @@
 		        }
 		    },
 		    series: [{
+		    	type: 'bar',
+		        barWidth: '40%',
 		        data: [{
 		        	value: 150,
 		        	label: {
@@ -645,26 +663,25 @@
 		        	},itemStyle:{
                         color: '#17E3FB'
                     }
-		        }],
-		        type: 'bar',
+		        }]
 		        
 		        //配置样式
-		        itemStyle: {   
-		            //通常情况下：
-		            normal:{  
-		　　　　　　　　　　　　//每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-		                color: function (params){
-		                    var colorList = ['rgb(164,205,238)','rgb(42,170,227)','rgb(25,46,94)','rgb(195,229,235)'];
-		                    return colorList[params.dataIndex];
-		                }
-		            },
-		            //鼠标悬停时：
-		            emphasis: {
-		                    shadowBlur: 10,
-		                    shadowOffsetX: 0,
-		                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-		            }
-		        },
+		//         itemStyle: {   
+		//             //通常情况下：
+		//             normal:{  
+		// 　　　　　　　　　　　　//每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
+		//                 color: function (params){
+		//                     var colorList = ['rgb(164,205,238)','rgb(42,170,227)','rgb(25,46,94)','rgb(195,229,235)'];
+		//                     return colorList[params.dataIndex];
+		//                 }
+		//             },
+		//             //鼠标悬停时：
+		//             emphasis: {
+		//                     shadowBlur: 10,
+		//                     shadowOffsetX: 0,
+		//                     shadowColor: 'rgba(0, 0, 0, 0.5)'
+		//             }
+		//         },
 		        //设置柱子的宽度
 		        // barWidth : 120,
 		    }]
@@ -715,6 +732,15 @@
 {name: "石人亭", value: [109.4954266322374, 36.60935018034923,-1]}]
         }]
 	    });
+	</script>
+	<script type="text/javascript">
+		$('.search>div>div').hover(function(){
+			$(this).parent().removeClass('move');
+		},function(){
+			$(this).parent().addClass('move');
+		}).on('click',function(){
+			window.location.href='./disposalReport.html';
+		})
 	</script>
 </body>
 </html>

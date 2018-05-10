@@ -128,6 +128,7 @@
 	    border-right: 35px solid #0071A7;
 	    border-top: 15px solid transparent;
 	    border-bottom: 15px solid transparent;
+	    cursor: pointer;
 	}
 	.mask.active {  
 	    border-right: 35px solid #0D3F78;
@@ -184,6 +185,7 @@
 		height: 250px;
 	}
 	.article {
+		max-width: 185px;
 	    margin-top: 40px;
 	    display: inline-block;
 	    padding: 8px 10px;
@@ -218,14 +220,20 @@
 		color: #ffffff;
 		text-align: center;
 	}
+	.industry-content-box {
+		width: 190px;
+		vertical-align: middle;
+		height: 38px;
+		background-color: #0a6ab8;
+	}
 	.industry-content {
 		padding: 5px;
 		line-height: 13px;
-		width: 190px;
-		height: 28px;
-		background-color: #0087E4;
 		color: #ffffff;
 		font-size: 10px;
+		position: relative;
+	    top: 50%;
+	    transform: translateY(-50%);
 	}
 	.search-box {
 		height: 37px;
@@ -263,18 +271,82 @@
 	}
 	table {
 		width: 300px;
-	    position: relative;
-	    top: 10px;
-	    left: -10px;
+		height: 200px;
+		overflow: scroll;
+	    position: absolute;
+	    top: 38px;
+	    left: 45px;
 		background-color: #0C4C97;
 		color: #ffffff;
 		text-align: center;
+	}
+	thead {
+		width: 300px;
 	}
 	thead td {
 		padding: 8px 5px;
 	}
 	td {
 		padding: 5px;
+	}
+	.tip-box {
+		position: relative;
+		margin: 20px 10px 10px;
+		padding-left: 10px;
+		border: 1px solid #01FBFE;
+		height: 73px;
+		background-color: #0C4C97;
+		text-align: center;
+	}
+	.tip-box>span {
+	    position: absolute;
+	    content: '';
+	    display: inline-block;
+	    width: 10px;
+	    height: 10px;
+	}
+	.tip-box>span.top-left {
+	    top: -3px;
+	    margin-left: -191px;
+	    background: url(../img/top-left.png) no-repeat 100% 100% /10px 10px;
+	}
+	.tip-box>span.top-right {
+	    top: -3px;
+	    left: 100%;
+	    margin-left: -7px;
+	    background: url(../img/top-right.png) no-repeat 100% 100% /10px 10px;
+	}
+	.tip-box>span.bottom-left {
+	    top: 100%;
+	    margin-left: -1px;
+		margin-top: -6px;
+	    background: url(../img/bottom-left.png) no-repeat 100% 100% /10px 10px;
+	}
+	.tip-box>span.bottom-right {
+	    top: 100%;
+	    left: 100%;
+	    margin-top: -7px;
+	    margin-left: -7px;
+	    background: url(../img/bottom-right.png) no-repeat 100% 100% /10px 10px;
+	}
+	.article-box {
+		display: none;
+	}
+	.where {
+		margin-top: 10px;
+		color: #00FFFF;
+	}
+	.when {
+		width: 50%;
+		float: left;
+		margin-top: 10px;
+		color: #00FFFF;
+	}
+	.how {
+		width: 50%;
+		float: left;
+		margin-top: 10px;
+		color: #00FFFF;
 	}
 </style>
 </head>
@@ -346,26 +418,69 @@
 				<div class="block-box-content">
 					<p class="title">警情统计</p>
 					<div class="mask-box float-l">
-						<div class="mask float-l mask-first"></div>
-						<div class="mask float-l mask-second"></div>
-						<div class="mask float-l mask-third active"></div>
-						<div class="mask float-l mask-forth"></div>
+						<div class="mask float-l mask-first" data="mask-first"></div>
+						<div class="mask float-l mask-second active" data="mask-second"></div>
+						<div class="mask float-l mask-third" data="mask-third"></div>
+						<div class="mask float-l mask-forth" data="mask-forth"></div>
 					</div>
-					<div class="article">
-						<p class="float-l">火灾</p>
-						<p class="content-block float-r">1302</p>
+					<div class="article-box" id="mask-first">
+						<div class="article">
+							2018年4月12日14点20分57秒金泽国际酒店发生气体火灾，起火点位于3楼302房间，楼内不少房客没有撤离。
+						</div>
 					</div>
-					<div class="article">
-						<p class="float-l">社会<br>救助</p>
-						<p class="content-block float-r">213</p>
+					<div class="article-box show" id="mask-second">
+						<div class="article">
+							<p class="float-l">火灾</p>
+							<p class="content-block float-r">1302</p>
+						</div>
+						<div class="article">
+							<p class="float-l">社会<br>救助</p>
+							<p class="content-block float-r">213</p>
+						</div>
+						<div class="article">
+							<p class="float-l">抢险<br>救援</p>
+							<p class="content-block float-r">347</p>
+						</div>
+						<div class="article">
+							<p class="float-l">公务<br>执勤</p>
+							<p class="content-block float-r">1357</p>
+						</div>
 					</div>
-					<div class="article">
-						<p class="float-l">抢险<br>救援</p>
-						<p class="content-block float-r">347</p>
+					<div class="article-box" id="mask-third">
+						<div class="article">
+							<p class="float-l">火灾</p>
+							<p class="content-block float-r">15</p>
+						</div>
+						<div class="article">
+							<p class="float-l">社会<br>救助</p>
+							<p class="content-block float-r">5</p>
+						</div>
+						<div class="article">
+							<p class="float-l">抢险<br>救援</p>
+							<p class="content-block float-r">7</p>
+						</div>
+						<div class="article">
+							<p class="float-l">公务<br>执勤</p>
+							<p class="content-block float-r">15</p>
+						</div>
 					</div>
-					<div class="article">
-						<p class="float-l">公务<br>执勤</p>
-						<p class="content-block float-r">1357</p>
+					<div class="article-box" id="mask-forth">
+						<div class="article">
+							<p class="float-l">火灾</p>
+							<p class="content-block float-r">2</p>
+						</div>
+						<div class="article">
+							<p class="float-l">社会<br>救助</p>
+							<p class="content-block float-r">3</p>
+						</div>
+						<div class="article">
+							<p class="float-l">抢险<br>救援</p>
+							<p class="content-block float-r">347</p>
+						</div>
+						<div class="article">
+							<p class="float-l">公务<br>执勤</p>
+							<p class="content-block float-r">5</p>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -373,26 +488,45 @@
 				<span class="top-right"></span>
 				<span class="bottom-left"></span>
 				<div class="block-box-content">
-					<p class="title">历年火灾分析</p>
+					<p class="title">警情信息</p>
+					<div class="tip-box">
+						<p class="border-top-left"></p>
+						<p class="border-top-right"></p>
+						<p class="border-bottom-left"></p>
+						<p class="border-bottom-right"></p>
+						<p class="where">金泽国际酒店</p>
+						<p class="when">2018.4.12  14:20:57</p>
+						<p class="how">一般火灾  气体火灾</p>
+					</div>
 					<div class="industry-box m-t-20">
 						<div class="industry-title float-l">建筑信息</div>
-						<div class="industry-content float-l">金泽国际酒店的建筑信息已 水泥钢筋结构为主</div>
+						<div class="industry-content-box float-l">
+							<div class="industry-content">金泽国际酒店的建筑信息已 水泥钢筋结构为主</div>
+						</div>
 					</div>
 					<div class="industry-box">
 						<div class="industry-title float-l">消防设施</div>
-						<div class="industry-content float-l">消防栓3个，泡沫灭火器10个</div>
+						<div class="industry-content-box float-l">
+							<div class="industry-content">消防栓3个，泡沫灭火器10个</div>
+						</div>
 					</div>
 					<div class="industry-box">
 						<div class="industry-title float-l">预案</div>
-						<div class="industry-content float-l">2018-3-23号预案</div>
+						<div class="industry-content-box float-l">
+							<div class="industry-content">2018-3-23号预案</div>
+						</div>
 					</div>
 					<div class="industry-box">
 						<div class="industry-title float-l">辖区信息</div>
-						<div class="industry-content float-l">金泽国际酒店位于中山东路平安大街 交叉口</div>
+						<div class="industry-content-box float-l">
+							<div class="industry-content">金泽国际酒店位于中山东路平安大街 交叉口</div>
+						</div>
 					</div>
 					<div class="industry-box">
 						<div class="industry-title float-l">单位信息</div>
-						<div class="industry-content float-l">以酒店经营住宿、餐饮娱乐为一体 的经营企业。</div>
+						<div class="industry-content-box float-l">
+							<div class="industry-content">以酒店经营住宿、餐饮娱乐为一体 的经营企业。</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -415,12 +549,54 @@
 				<span class="bottom-left"></span>
 				<p class="title">人员统计</p>
 				<div class="mask-box float-l">
-					<div class="mask float-l mask-fifth"></div>
-					<div class="mask float-l mask-sixth"></div>
-					<div class="mask float-l mask-seventh active"></div>
-					<div class="mask float-l mask-eight"></div>
+					<div class="mask float-l mask-fifth" data="mask-fifth"></div>
+					<div class="mask float-l mask-sixth active" data="mask-sixth"></div>
+					<div class="mask float-l mask-seventh" data="mask-seventh"></div>
+					<div class="mask float-l mask-eight" data="mask-eight"></div>
 				</div>
-				<table>
+				<table class="article-box" id="mask-fifth">
+					<thead>
+						<tr>
+							<td>地点</td>
+							<td>负责人</td>
+							<td>人数</td>
+							<td>联系方式</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>枣园革命旧址</td>
+							<td>张小明</td>
+							<td>12</td>
+							<td>156****1342</td>
+						</tr>
+						<tr>
+							<td>宝塔山</td>
+							<td>张小明</td>
+							<td>7</td>
+							<td>156****1342</td>
+						</tr>
+						<tr>
+							<td>火车站</td>
+							<td>张小明</td>
+							<td>10</td>
+							<td>156****1342</td>
+						</tr>
+						<tr>
+							<td>教育学院</td>
+							<td>张小明</td>
+							<td>5</td>
+							<td>156****1342</td>
+						</tr>
+						<tr>
+							<td>机场</td>
+							<td>张小明</td>
+							<td>10</td>
+							<td>156****1342</td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="article-box show" id="mask-sixth">
 					<thead>
 						<tr>
 							<td>中队</td>
@@ -459,6 +635,96 @@
 							<td>1024</td>
 							<td>1335</td>
 							<td>1033</td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="article-box" id="mask-seventh">
+					<thead>
+						<tr>
+							<td>地点</td>
+							<td>联系人</td>
+							<td>人数</td>
+							<td>联系方式</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>枣园革命旧址</td>
+							<td>张小明</td>
+							<td>12</td>
+							<td>156****1342</td>
+						</tr>
+						<tr>
+							<td>宝塔山</td>
+							<td>张小明</td>
+							<td>7</td>
+							<td>156****1342</td>
+						</tr>
+						<tr>
+							<td>火车站</td>
+							<td>张小明</td>
+							<td>10</td>
+							<td>156****1342</td>
+						</tr>
+						<tr>
+							<td>教育学院</td>
+							<td>张小明</td>
+							<td>5</td>
+							<td>156****1342</td>
+						</tr>
+						<tr>
+							<td>机场</td>
+							<td>张小明</td>
+							<td>10</td>
+							<td>156****1342</td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="article-box" id="mask-eight">
+					<thead>
+						<tr>
+							<td>专家</td>
+							<td>性别</td>
+							<td>类别</td>
+							<td>单位</td>
+							<td>联系方式</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>李晓莉</td>
+							<td>女</td>
+							<td>消防专家</td>
+							<td>消防局</td>
+							<td>138****2322</td>
+						</tr>
+						<tr>
+							<td>李晓莉</td>
+							<td>女</td>
+							<td>消防专家</td>
+							<td>消防局</td>
+							<td>138****2322</td>
+						</tr>
+						<tr>
+							<td>李晓莉</td>
+							<td>女</td>
+							<td>消防专家</td>
+							<td>消防局</td>
+							<td>138****2322</td>
+						</tr>
+						<tr>
+							<td>李晓莉</td>
+							<td>女</td>
+							<td>消防专家</td>
+							<td>消防局</td>
+							<td>138****2322</td>
+						</tr>
+						<tr>
+							<td>李晓莉</td>
+							<td>女</td>
+							<td>消防专家</td>
+							<td>消防局</td>
+							<td>138****2322</td>
 						</tr>
 					</tbody>
 				</table>
@@ -781,6 +1047,14 @@ var convertData = function (data) {
 	            blurSize: 6
 	        }]
 	    });
+	</script>
+	<script type="text/javascript">
+		$('.mask').on('click',function(){
+			$(this).parent().find('.mask').removeClass('active');
+			$(this).addClass('active');
+			$(this).parent().parent().find('.article-box').removeClass('show');
+			$('#'+$(this).attr('data')).addClass('show');
+		})
 	</script>
 </body>
 </html>

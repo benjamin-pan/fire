@@ -280,3 +280,50 @@ a{
 	width: 140px;
 	height: 6px;
 }
+.show {
+	display: block!important;
+}
+.border-top-left {
+	position: absolute;
+	top: -9px;
+	left: -8px;
+	content: '';
+	background: url(../img/border-left-top.png) no-repeat 100% 100% /28px 28px;
+	display: inline-block;
+	width: 28px;
+	height: 28px;
+}
+.border-top-right {
+	position: absolute;
+	top: -10px;
+	left: 100%;
+	margin-left: -53px;
+	content: '';
+	background: url(../img/border-right-top.png) no-repeat 100% 100% /60px 28px;
+	display: inline-block;
+	width: 60px;
+	height: 28px;
+}
+.border-bottom-left {
+	position: absolute;
+	top: 100%;
+	left: -18px;
+	margin-top: -21px;
+	content: '';
+	background: url(../img/border-left-bottom.png) no-repeat 100% 100% /200px 28px;
+	display: inline-block;
+	width: 210px;
+	height: 28px;
+}
+.border-bottom-right {
+	position: absolute;
+	top: 100%;
+	left: 100%;
+	margin-top: -21px;
+    margin-left: -21px;
+	content: '';
+	background: url(../img/border-right-bottom.png) no-repeat 100% 100% /28px 28px;
+	display: inline-block;
+	width: 28px;
+	height: 28px;
+}

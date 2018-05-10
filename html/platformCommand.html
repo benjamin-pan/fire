@@ -102,7 +102,7 @@
 		
 	</style>
 	<style type="text/css">
-	.tip-box>span {
+		.tip-box>span {
 		    position: absolute;
 		    content: '';
 		    display: inline-block;
@@ -179,7 +179,7 @@
 		}
 		.tip-box {
 			position: relative;
-			margin: 10px 5px;
+			margin: 20px 10px 10px;
 			padding-left: 10px;
 			border: 1px solid #01FBFE;
 			height: 73px;
@@ -192,9 +192,6 @@
 			text-align: center;
 			color: #ffffff;
 			background-color: #0C4C97;
-		}
-		.dynamic-table tbody {
-			color: #07D6DE;
 		}
 		.capsule {
 		    padding: 0 5px;
@@ -249,20 +246,22 @@
 			right: -53px;
 		}
 		.information {
-			width: 366px;
-			margin: 10px 5px;
+			padding: 10px 5px 5px;
+			display: none;
+			width: calc(100% - 20px);
+			margin: 0 5px 10px;
 			color: #ffffff;
 			font-size: 12px;
 			text-align: center;
-		}
-		.information td {
-			border-top: 1px solid #01FBFE;
+			background-color: #0C4C97;
 		}
 		.information td:nth-of-type(1) {
+			border-top: 1px solid #01FBFE;
 			border-right: 1px solid #01FBFE;
 			text-align: right;
 		}
 		.information td:nth-of-type(2) {
+			border-top: 1px solid #01FBFE;
 			text-align: left;
 		}
 		.goto-building {
@@ -284,11 +283,13 @@
 			line-height: 40px;
 			text-align: center;
 			color: #ffffff;
+			cursor: pointer;
 		}
 		.table-left>div.active {
 			background-color: #0C4C97;
 		}
 		.table-right {
+			display: none;
 			margin-left: 0;
 			background-color: #0C4C97;
 			border-bottom: 1px solid #40FDD6;
@@ -322,6 +323,36 @@
 		.warning {
 			padding: 10px 5px;
 			font-size: 10px;
+		}
+		.fill {
+			width: calc(100% - 20px);
+		}
+		.table-switch-button {
+			cursor: pointer;
+			padding: 3px;
+			color: #ffffff;
+		}
+		.table-switch-button.active {
+			background-color: #0C4C97;
+		}
+		.show {
+		     display: table!important; 
+		}
+		.border-top>.width25 {
+			text-align: right;
+			width: 25%;
+		}
+		.border-top>.width75 {
+			border-left: 1px solid #01FBFE;
+			text-align: left;
+			width: calc(75% - 1px);
+		}
+		.border-top {
+			overflow: hidden;
+			border-top: 1px solid #01FBFE;
+		}
+		.border-bottom {
+			border-bottom: 1px solid #01FBFE;
 		}
 	</style>
 </head>
@@ -426,10 +457,10 @@
 				<div class="block-box-content">
 					<p class="title">警情动态</p>
 					<div class="tip-box">
-						<span class="top-left"></span>
-						<span class="top-right"></span>
-						<span class="bottom-left"></span>
-						<span class="bottom-right"></span>
+						<p class="border-top-left"></p>
+						<p class="border-top-right"></p>
+						<p class="border-bottom-left"></p>
+						<p class="border-bottom-right"></p>
 						<p class="where">金泽国际酒店</p>
 						<p class="when">2018.4.12  14:20:57</p>
 						<p class="how">一般火灾  气体火灾</p>
@@ -501,7 +532,7 @@
 								<td>抢先编队</td>
 								<td>5.6km</td>
 								<td>1＇7＂</td>
-								<td><div class="capsule">一键派警</div></td>
+								<td><div class="capsule fill">一键派警</div></td>
 							</tr>
 							<tr>
 								<td>高喷编队</td>
@@ -668,63 +699,80 @@
 				<span class="bottom-left"></span>
 				<p class="title">建筑信息及周边</p>
 				<div class="tip-box">
-						<span class="top-left"></span>
-						<span class="top-right"></span>
-						<span class="bottom-left"></span>
-						<span class="bottom-right"></span>
-						<p class="where">金泽国际酒店</p>
-						<p class="when">2018.4.12  14:20:57</p>
-						<p class="how">一般火灾  气体火灾</p>
+					<span class="top-left"></span>
+					<span class="top-right"></span>
+					<span class="bottom-left"></span>
+					<span class="bottom-right"></span>
+					<p class="where">金泽国际酒店</p>
+					<p class="when">2018.4.12  14:20:57</p>
+					<p class="how">一般火灾  气体火灾</p>
+				</div>
+				<div class="m-l-5 m-r-5">
+					<span data="one" class="table-switch-button active">建筑信息</span>
+					<span data="two" class="table-switch-button">预案</span>
+					<span data="three" class="table-switch-button">消防设施</span>
+					<span data="four" class="table-switch-button">辖区信息</span>
+					<span data="five" class="table-switch-button">单位信息</span>
+				</div>
+				<div id="one" class="information show">
+					<div class="border-top">
+						<div class="float-l width25">名称：</div>
+						<div class="float-l width75">金泽国际酒店</div>
 					</div>
-				<table class="information">
-					<tbody>
-						<tr>
-							<td>名称：</td>
-							<td>金泽国际酒店</td>
-						</tr>
-						<tr>
-							<td>地址：</td>
-							<td>宝塔区东关街24号(近延安汽车站)</td>
-						</tr>
-						<tr>
-							<td>结构：</td>
-							<td>钢、钢筋混凝土</td>
-						</tr>
-						<tr>
-							<td>使用性质：</td>
-							<td>酒店</td>
-						</tr>
-						<tr>
-							<td>耐火等级：</td>
-							<td>二级耐火</td>
-						</tr>
-						<tr>
-							<td>建筑面积：</td>
-							<td>4000平方米</td>
-						</tr>
-						<tr>
-							<td>高度：</td>
-							<td>100米</td>
-						</tr>
-						<tr>
-							<td>学校：</td>
-							<td>艺术学院 </td>
-						</tr>
-						<tr>
-							<td>商业：</td>
-							<td>百货大楼</td>
-						</tr>
-						<tr>
-							<td>银行：</td>
-							<td>工行、农行、建行</td>
-						</tr>
-						<tr>
-							<td>医院：</td>
-							<td>市医院</td>
-						</tr>
-					</tbody>
-				</table>
-				<div class="goto-building">建筑画像</div>
+					<div class="border-top">
+						<div class="float-l width25">地址：</div>
+						<div class="float-l width75">宝塔区东关街24号(近延安汽车站)</div>
+					</div>
+					<div class="border-top">
+						<div class="float-l width25">结构：</div>
+						<div class="float-l width75">钢、钢筋混凝土</div>
+					</div>
+					<div class="border-top">
+						<div class="float-l width25">使用性质：</div>
+						<div class="float-l width75">酒店</div>
+					</div>
+					<div class="border-top">
+						<div class="float-l width25">耐火等级：</div>
+						<div class="float-l width75">二级耐火</div>
+					</div>
+					<div class="border-top">
+						<div class="float-l width25">建筑面积：</div>
+						<div class="float-l width75">4000平方米</div>
+					</div>
+					<div class="border-top">
+						<div class="float-l width25">高度：</div>
+						<div class="float-l width75">100米</div>
+					</div>
+					<div class="border-top">
+						<div class="float-l width25">学校：</div>
+						<div class="float-l width75">艺术学院</div>
+					</div>
+					<div class="border-top">
+						<div class="float-l width25">商业：</div>
+						<div class="float-l width75">百货大楼</div>
+					</div>
+					<div class="border-top">
+						<div class="float-l width25">银行：</div>
+						<div class="float-l width75">工行、农行、建行</div>
+					</div>
+					<div class="border-top border-bottom">
+						<div class="float-l width25">医院：</div>
+						<div class="float-l width75">市医院</div>
+					</div>
+				</div>
+				<div id="two" class="information">
+					2018-3-23号预案
+				</div>
+				<div id="three" class="information">
+					消防栓3个、泡沫灭火器10个
+				</div>
+				<div id="four" class="information">
+					宝塔区中山东路平安大街交叉口
+				</div>
+				<div id="five" class="information">
+					以酒店经营住宿、餐饮娱乐为一体的经营企业
+				</div>
+				<a href="buildingPortrait.html"><div class="goto-building">建筑画像</div></a>
 			</div>
 			<div class="block-box years-of-fire-analysis">
 				<span class="top-right"></span>
@@ -732,18 +780,41 @@
 				<div class="block-box-content">
 					<p class="title">资源列表</p>
 					<div class="float-l table-left">
-						<div class="active">消防站</div>
-						<div>消防单位</div>
-						<div>水源</div>
-						<div>消防栓</div>
+						<div class="active" data="fireStation">消防站</div>
+						<div data="fireControlUnit">消防单位</div>
+						<div data="water">水源</div>
+						<div data="fireHydrant">消防栓</div>
 					</div>
-					<div class="float-l table-right">
+					<div class="float-l table-right show" id="fireStation">
 						<p>金延安购物中心</p>
 						<p>延安黄龙商城住宿部</p>
 						<p>延安东大百货</p>
 						<p>延安丽融东兴百汇超市</p>
 						<p>延安丽融东兴百汇超市延安东大百货</p>
 						<p>延安丽融东兴百汇超市</p>
+					</div>
+					<div class="float-l table-right" id="fireControlUnit">
+						<p>延安汽车站</p>
+						<p>东方红世纪广场</p>
+						<p>万佛寺</p>
+						<p>盛大美食广场</p>
+						<p>嘉岭商务大厦</p>
+						<p>广电大厦</p>
+					</div>
+					<div class="float-l table-right" id="water">
+						<p>延安供电局</p>
+						<p>市气象局</p>
+						<p>延安汽车站</p>
+						<p>东关小学</p>
+						<p>延安百货大楼</p>
+						<p>宝塔山旅游景区</p>
+					</div>
+					<div class="float-l table-right" id="fireHydrant">
+						<p>延安供电局</p>
+						<p>东盛农贸市场</p>
+						<p>神舟国际大酒店</p>
+						<p>延安城市管理局</p>
+						<p>东方红世纪广场</p>
 					</div>
 			</div>
 		</div>
@@ -876,6 +947,22 @@
 {name: "石人亭", value: [109.4954266322374, 36.60935018034923,-1]}]
         }]
 	    });
+	</script>
+	<script type="text/javascript">
+		$(function(){
+			$('.table-left>div').on('click',function(){
+				$('.table-left>div').removeClass('active');
+				$(this).addClass('active');
+				$('.table-right').removeClass('show');
+				$('#'+$(this).attr('data')).addClass('show');
+			})
+			$('.table-switch-button').on('click',function(){
+				$('.table-switch-button').removeClass('active');
+				$(this).addClass('active');
+				$('.information').removeClass('show');
+				$('#'+$(this).attr('data')).addClass('show');
+			})
+		})
 	</script>
 </body>
 </html>

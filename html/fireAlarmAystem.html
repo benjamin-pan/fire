@@ -28,6 +28,15 @@
 			border-radius: 5px;
 			background-color: #51D7FF;
 		}
+		.warm {
+			background-color: #FFB307;
+		}
+		.dangerouse {
+			background-color: #F25841;
+		}
+		.great {
+			background-color: #249561;
+		}
 		.left {
 			margin-top: 10px;
 			margin-right: 0;
@@ -154,6 +163,11 @@
 			background-color: #02959B;
 			font-size: 10px;
 			color: #255B7A;
+			-webkit-transform: skew(-20deg);
+		    -moz-transform: skew(-20deg);
+		    -o-transform: skew(-20deg);
+		    -ms-transform: skew(-20deg);
+		    transform: skew(-20deg);
 		}
 		.button.active {
 			margin-top: 30px;
@@ -403,7 +417,7 @@
 			<div class="block-box">
 				<span class="top-right"></span>
 				<span class="bottom-left"></span>
-				<p class="title-second">报警数量</p>
+				<a href="historicalInformationQuery.html"><p class="title-second">报警数量</p></a>
 				<table class="warning">
 					<thead>
 						<tr>
@@ -415,7 +429,7 @@
 						<tr>
 							<td>
 								<p class="font-style">实时报警</p>
-								<div class="the-percentage" style="width: 20%;"></div>
+								<div class="the-percentage warm" style="width: 20%;"></div>
 							</td>
 							<td class="percentage">20</td>
 						</tr>
@@ -429,14 +443,14 @@
 						<tr>
 							<td>
 								<p class="font-style">实时报警</p>
-								<div class="the-percentage" style="width: 10%;"></div>
+								<div class="the-percentage great" style="width: 10%;"></div>
 							</td>
 							<td class="percentage">10</td>
 						</tr>
 						<tr>
 							<td>
 								<p class="font-style">实时报警</p>
-								<div class="the-percentage" style="width: 1%;"></div>
+								<div class="the-percentage dangerouse" style="width: 1%;"></div>
 							</td>
 							<td class="percentage">1</td>
 						</tr>
@@ -462,7 +476,7 @@
 			<div class="block-box">
 				<span class="top-right"></span>
 				<span class="bottom-left"></span>
-				<p class="title">信息查看</p>
+				<a href="showData.html"><p class="title">信息查看</p></a>
 				<div id="keyUnitStatistics">
 					<img src="../img/new.png">
 					<img src="../img/modify.png">
@@ -523,41 +537,19 @@
 						<span class="top-right"></span>
 						<span class="bottom-left"></span>
 						<span class="bottom-right"></span>
-						<div class="smooke-box float-l">
-							<img src="../img/smooke-warning.png">
-							<p>烟雾警报</p>
+						<div class="gas-box float-l">
+							<img src="../img/gas-warning.png">
+							<p>燃气报警</p>
 						</div>
 						<div class="text-box float-l">
 							<p class="num">86370325964789654</p>
-							<p class="addr">陕西省延安市中华大街水榭花都14-2-2013</p>
-							<p class="time">2018.4.13   15:46:32</p>
-							<p class="what">报警超时，状态异常！</p>
-							<p class="concentration">浓度：60%</p>
-						</div>
-						<div class="float-r">
-							<div class="button active">解除</div>
-							<div class="button">确认</div>
-						</div>
-					</div>
-					<div class="tip-box">
-						<span class="top-left"></span>
-						<span class="top-right"></span>
-						<span class="bottom-left"></span>
-						<span class="bottom-right"></span>
-						<div class="electrical-box float-l">
-							<img src="../img/electrical-warning.png">
-							<p>电气报警</p>
-						</div>
-						<div class="text-box float-l">
-							<p class="num">86370325964789654</p>
-							<p class="addr">陕西省延安市宝塔区科技园</p>
+							<p class="addr">陕西省延安市中华大街光华小区19-1-305</p>
 							<p class="time">2018.4.13   15:46:32</p>
 							<p class="what">备注</p>
 							<p class="concentration">浓度：60%</p>
 						</div>
 						<div class="float-r">
-							<div class="button active">解除</div>
-							<div class="button">确认</div>
+							<div class="button active">已解除</div>
 						</div>
 					</div>
 					<div class="tip-box">
@@ -577,8 +569,7 @@
 							<p class="concentration">浓度：60%</p>
 						</div>
 						<div class="float-r">
-							<div class="button active">解除</div>
-							<div class="button">确认</div>
+							<div class="button active">未解除</div>
 						</div>
 					</div>
 					<div class="tip-box">
@@ -586,20 +577,19 @@
 						<span class="top-right"></span>
 						<span class="bottom-left"></span>
 						<span class="bottom-right"></span>
-						<div class="gas-box float-l">
-							<img src="../img/gas-warning.png">
-							<p>燃气报警</p>
+						<div class="smooke-box float-l">
+							<img src="../img/smooke-warning.png">
+							<p>烟雾警报</p>
 						</div>
 						<div class="text-box float-l">
 							<p class="num">86370325964789654</p>
-							<p class="addr">陕西省延安市中华大街光华小区19-1-305</p>
+							<p class="addr">陕西省延安市中华大街水榭花都14-2-2013</p>
 							<p class="time">2018.4.13   15:46:32</p>
-							<p class="what">备注</p>
+							<p class="what">报警超时，状态异常！</p>
 							<p class="concentration">浓度：60%</p>
 						</div>
 						<div class="float-r">
-							<div class="button active">解除</div>
-							<div class="button">确认</div>
+							<div class="button active">已解除</div>
 						</div>
 					</div>
 				</div>
@@ -627,8 +617,8 @@
 		var myChart = echarts.init(document.getElementById('trend'));
 
 		var dataAxis = ['烟感', '燃气', '电气', '手报', '消防水\n系统监测', '声光', '消火栓'];
-		var data = [150, 300, 250, 90, 240, 330, 95, 110, 60, 140];
-		var yMax = 500;
+		var data = [4200, 3300, 2800, 3000, 4000, 4500, 4500];
+		var yMax = 5000;
 		var dataShadow = [];
 
 		for (var i = 0; i < data.length; i++) {
@@ -644,6 +634,12 @@
 		        },
 		        left: '50px',
 		        top: '10px'
+		    },
+		    tooltip : {
+		        trigger: 'axis',
+		        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+		            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+		        }
 		    },
 		    xAxis: {
 		        data: dataAxis,
@@ -778,15 +774,15 @@
 
 		var myChart = echarts.init(document.getElementById('connection'));
 		option = {
-		    // tooltip : {
-		    //     formatter: "{a} <br/>{b} : {c}%"
-		    // },
+		    tooltip : {
+		        formatter: "{a} : {c}%"
+		    },
 		    series: [
 		        {
-		            name: '业务指标',
+		            name: '接通率',
 		            type: 'gauge',
-		            radius: '90%',
-		            // detail: {formatter:'{value}%'},
+		            radius: '95%',
+		            detail: {formatter:'{value}%'},
 		            data: [{value: 50}]
 		        }
 		    ]
